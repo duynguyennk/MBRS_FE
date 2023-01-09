@@ -1,0 +1,33 @@
+<div class="dropdown">
+  <button mat-icon-button>
+    <mat-icon class="icon">notifications</mat-icon>
+    <span class="badge" *ngIf="signalrService.badgeCount > 0">{{
+      signalrService.badgeCount
+    }}</span>
+  </button>
+  <div class="dropdown-content">
+    <div class="box-notice text-start" *ngFor="let d of signalrService.data">
+      <div
+        (click)="
+          changeStatusNotification(
+            d.notificationOrderReceptionistID,
+            d.typeNotification
+          )
+        "
+        class="row bg-grey"
+      >
+        <div class="col-1"></div>
+        <div class="col-2 my-auto text-center">
+          <i class="pi pi-bell color-mail"></i>
+        </div>
+        <div class="col-7 bg-grey py-3">
+          <p class="fm-link-notice">{{ d.contentNotification }}</p>
+          <p class="mb-0 mt-1 fm-text-link">{{ d.convertDate }}</p>
+        </div>
+        <div *ngIf="d.statusNotification" class="col-2 my-auto">
+          <i class="pi pi-circle-fill color-icon"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

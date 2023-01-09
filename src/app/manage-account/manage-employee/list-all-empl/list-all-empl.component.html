@@ -1,0 +1,122 @@
+
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<main class="container">
+  <div class="employee-text">
+    <p class="fm-title">
+      Quản Lý Tài Khoản Nhân Viên
+    </p>
+  </div>
+  <hr />
+  <div class="mana-empl p-3">
+    <p class="fw-bold">Tìm Kiếm:</p>
+    <div class="d-flex justify-content-between my-4">
+      <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+        <div class="mana-empl-search row">
+          <div class="col-4 ">
+            <input formControlName="filterValue" type="text" placeholder="Tìm Kiếm" minlength="1" maxlength="150" class="form-control me-2" />
+          </div>
+          <div class="col-4">
+            <select formControlName="filterName"  [ngClass]="{'is-invalid':submitted && searchForm.controls.filterName.errors}" class="form-select" id="inputGroupSelect01">
+              
+              <option value="all">Tất Cả</option>
+              <option value="full_name">Tên Nhân Viên</option>
+              <option value="user_name">Tên Tài Khoản</option>
+              <option value="day_of_birth">Ngày Sinh</option>
+              <option value="cccd">CCCD/CMND</option>
+              <option value="phone_number">Số Điện Thoại</option>
+              <option value="department_name">Vai Trò</option>
+            </select>
+          </div>
+          <div class="col-4">
+            <button class="fm-btn-y" type="submit">Tìm Kiếm</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4"></div>
+          <div class="col-4"><div *ngIf="submitted && searchForm.controls.filterName.errors" class="text-danger text-center">
+            <div *ngIf="searchForm.controls.filterName.errors.required">
+              {{isEmpty}}
+            </div>
+          </div>
+        </div>
+          <div class="col-4"></div>
+        </div>
+      </form>
+      <div class="mana-empl-createAcc">
+        <a routerLink="./createAcc-employee">
+          <button type="button" class="btn btn-outline-secondary">
+            <i class="pi pi-user-plus"></i> Tạo Tài Khoản
+          </button>
+        </a>
+      </div>
+    </div>
+    <div class="table-account text-center">
+      <table class="table" border=1>    
+          <tr class="text-white text-center">
+            <th class="my-auto">
+              <p class="mb-0">STT</p>
+            </th>
+            <th (click)="sort('fullName')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Tên Nhân Viên
+            </th>
+            <th (click)="sort('userName')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Tên Tài Khoản
+            </th>
+            <th (click)="sort('dateOfBirth')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Ngày Sinh
+            </th>
+            <th (click)="sort('phoneNumber')" scope="col">
+              <i class="pi pi-sort align-middle"></i> CCCD/CMND
+            </th>
+            <th (click)="sort('phoneNumber')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Số Điện Thoại
+            </th>
+            <th (click)="sort('departmentName')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Vai Trò
+            </th>
+            <th><p class="mb-0">Thao Tác</p></th>
+          </tr>
+          <tbody>
+            <tr *ngFor="
+              let e of employees
+                | paginate
+                  : {
+                      itemsPerPage: tableSize,
+                      currentPage: page,
+                      totalItems: count
+                    }
+                | orderBy: orderHeader:isDescOrder;
+              let i = index
+            ">
+            <td></td>
+            <td class="text-start">{{ e.fullName }}</td>
+            <td class="text-start">{{ e.userName }}</td>
+            <td>{{ e.dateOfBirth }}</td>
+            <td>{{ e.identifyNumber }}</td>
+            <td>{{ e.phoneNumber }}</td>
+            <td class="text-start">{{ e.departmentName }}</td>
+            <td>
+              <a [routerLink]="['./editAcc-employee/', e.employeeID]"><i class="pi pi-pencil me-2"></i></a>
+              <a routerLink="./" (click)="deleteEmployees(e.employeeID, e.accountID)"><i
+                  class="pi pi-user-minus"></i></a>
+            </td>
+          </tr>
+          </tbody>
+       
+      </table>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <div>
+      <select (change)="onTableSizeChange($event)">
+        <option *ngFor="let size of tableSizes">
+          {{ size }}
+        </option>
+      </select>
+    </div>
+    <div>
+      <pagination-controls previousLabel="Trước" nextLabel="Tiếp" (pageChange)="onTableDataChange($event)">
+      </pagination-controls>
+    </div>
+  </div>
+</main>

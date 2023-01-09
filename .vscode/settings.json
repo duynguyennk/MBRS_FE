@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/66b61d7c-99f8-4087-b6c4-0bd4d7239de4/AppServices/subscriptions/66b61d7c-99f8-4087-b6c4-0bd4d7239de4/resourceGroups/MBRS-API/providers/Microsoft.Web/sites/MBRS-FE",
+    "appService.deploySubpath": "./dist"
+}

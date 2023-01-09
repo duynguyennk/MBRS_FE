@@ -1,0 +1,204 @@
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<main class="container">
+  <div class="w-form-60">
+    <div class="customer-text">
+      <p class="fm-title">Tạo Thông Tin Đồ Ăn</p>
+    </div>
+    <hr />
+    <p class="remind">Điền đầy đủ thông tin đồ ăn bên dưới để tạo</p>
+    <form [formGroup]="foodServiceForm" (ngSubmit)="onSubmit()" class="my-5">
+      <!--  -->
+      <p class="fm-text">Ảnh Đồ Ăn</p>
+      <div class="add-img-room mb-5">
+        <div class="btn-add text-end">
+          <!-- <button class="btn-add-room fw-bold rounded-pill px-4 py-2">
+            Thêm Ảnh
+          </button> -->
+          <div class="card">
+            <p-fileUpload #formImage
+              name="demo[]"
+              [customUpload]="true"
+              [fileLimit]="1"
+              (onSelect)="onSelect($event,formImage)"
+              (onClear)="onClear()"
+              [showUploadButton]="false"
+              accept="image/*"
+              chooseLabel="Thêm Ảnh"
+              cancelLabel = "Hủy Ảnh"
+              invalidFileLimitMessageSummary="Chỉ được thêm 1 ảnh"
+            >
+              <!-- <ng-template pTemplate="content">
+                <ul *ngIf="uploadedFiles.length">
+                  <li *ngFor="let file of uploadedFiles">
+                    {{ file.name }} - {{ file.size }} bytes
+                  </li>
+                </ul>
+              </ng-template> -->
+            </p-fileUpload>
+            <!-- <br>
+            <img [src]="imagePath" alt="" width="300"> -->
+          </div>
+        </div>
+      </div>
+      <!--  -->
+      <p class="fm-text">Thông Tin Đồ Ăn</p>
+      <div class="add-infor fm-border mb-5">
+        <div class="form-group mb-4">
+          <label for="foodCode" class="title-input"
+            ><span class="color-red">*</span> Mã Đồ Ăn
+          </label>
+          <input
+            formControlName="foodCode"
+            type="text"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid':
+                submitted && foodServiceForm.controls.foodCode.errors
+            }"
+            minlength="2"
+            maxlength="50"
+            placeholder="VD: F01"
+          />
+          <div
+            *ngIf="submitted && foodServiceForm.controls.foodCode.errors"
+            class="text-danger"
+          >
+            <div *ngIf="foodServiceForm.controls.foodCode.errors.required">
+              {{ isEmpty }}
+            </div>
+            <div *ngIf="foodServiceForm.controls.foodCode.errors.minlength">
+              {{ atLeast2C }}
+            </div>
+            <div *ngIf="foodServiceForm.controls.foodCode.errors.pattern">
+              {{ atLeastNum_Let }}
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-4">
+          <label for="foodName" class="title-input"
+            ><span class="color-red">*</span> Tên Đồ Ăn
+          </label>
+          <input
+            formControlName="foodName"
+            type="text"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid':
+                submitted && foodServiceForm.controls.foodName.errors
+            }"
+            minlength="2"
+            maxlength="50"
+            placeholder="VD: Coca"
+          />
+          <div
+            *ngIf="submitted && foodServiceForm.controls.foodName.errors"
+            class="text-danger"
+          >
+            <div *ngIf="foodServiceForm.controls.foodName.errors.required">
+              {{ isEmpty }}
+            </div>
+            <div *ngIf="foodServiceForm.controls.foodName.errors.minlength">
+              {{ atLeast2C }}
+            </div>
+            <div *ngIf="foodServiceForm.controls.foodName.errors.pattern">
+              {{ isLetter }}
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-4">
+          <label for="typeFoodID" class="title-input"
+            ><span class="color-red">*</span> Loại Đồ Ăn
+          </label>
+          <select
+            formControlName="typeFoodID"
+            [ngClass]="{
+              'is-invalid':
+                submitted && foodServiceForm.controls.typeFoodID.errors
+            }"
+            class="form-select"
+          >
+            <option *ngFor="let t of typeFoodList" value="{{ t.typeFoodID }}">
+              {{ t.typeFoodName }}
+            </option>
+          </select>
+          <div
+            *ngIf="submitted && foodServiceForm.controls.typeFoodID.errors"
+            class="text-danger"
+          >
+            <div *ngIf="foodServiceForm.controls.typeFoodID.errors.required">
+              {{ isEmpty }}
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-4">
+          <label for="price" class="title-input"
+            ><span class="color-red">*</span> Giá
+          </label>
+          <input
+            formControlName="price"
+            type="number"
+            class="form-control"
+            [ngClass]="{
+              'is-invalid': submitted && foodServiceForm.controls.price.errors
+            }"
+            minlength="2"
+            maxlength="50"
+            placeholder="VD: 1000000"
+          />
+          <div
+            *ngIf="submitted && foodServiceForm.controls.price.errors"
+            class="text-danger"
+          >
+            <div *ngIf="foodServiceForm.controls.price.errors.required">
+              {{ isEmpty }}
+            </div>
+            <div *ngIf="foodServiceForm.controls.price.errors.minlength">
+              {{ atLeast2C }}
+            </div>
+            <div *ngIf="foodServiceForm.controls.price.errors.number">
+              {{ isNum }}
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-4">
+          <label for="quantity" class="title-input"
+            ><span class="color-red">*</span> Số Lượng
+          </label>
+          <input
+            formControlName="quantity"
+            type="number"
+            [ngClass]="{
+              'is-invalid':
+                submitted && foodServiceForm.controls.quantity.errors
+            }"
+            minlength="2"
+            maxlength="10"
+            class="form-control"
+            placeholder="VD: 4"
+          />
+          <div
+            *ngIf="submitted && foodServiceForm.controls.quantity.errors"
+            class="text-danger mt-2"
+          >
+            <div *ngIf="foodServiceForm.controls.quantity.errors.required">
+              {{ isEmpty }}
+            </div>
+            <div *ngIf="foodServiceForm.controls.quantity.errors.minlength">
+              {{ atLeast2to10C }}
+            </div>
+            <div *ngIf="foodServiceForm.controls.quantity.errors.number">
+              {{ isNum }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--  -->
+      <div class="fm-btn-cancel text-end my-5">
+        <button class="fw-bold btn px-4 py-2" (click)="cancelForm()">
+          <i class="pi pi-times"></i> Hủy
+        </button>
+        <button class="fm-btn-y" type="submit">Tạo</button>
+      </div>
+    </form>
+  </div>
+</main>

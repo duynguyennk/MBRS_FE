@@ -1,0 +1,47 @@
+.notice{
+    text-align: center;
+    border: 0.5px solid #003c7a;
+    font-weight: 600;
+    position: absolute;
+    width: 100%;
+    transform: translate(0, 80%);
+    background-color: white;
+}
+.notice-title {
+  background-color: #003c7a;
+  color: white;
+  padding: 10px 0;
+  position: relative;
+}
+.btn-close-dialog{
+    position: absolute;
+    top: 0;
+    right: 2%;
+}
+.color-white{
+    color: white;
+}
+.notice-content{
+    /* margin: 1.3rem 0 !important; */
+    padding: 2rem 0;
+}
+.icon-confirm{
+    /* margin-bottom: 1.3rem !important; */
+    padding: 4rem 0;
+}
+i{
+    color: white;
+    font-size: 4rem;
+}
+::ng-deep .modal-content{
+    border-radius: inherit;
+    border: none;
+}
+.text-title{
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+.text-content{
+    font-size: 1.2rem;
+    font-weight: 500;
+}

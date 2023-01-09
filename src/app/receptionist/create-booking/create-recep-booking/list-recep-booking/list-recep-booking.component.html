@@ -1,0 +1,309 @@
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<main>
+  <!-- booking room -->
+  <div class="booking-room">
+    <img src="./assets/images/booking-room/datphong.png" alt="" class="img-main" />
+    <p class="title text-white">ĐẶT PHÒNG</p>
+
+    <form [formGroup]="formBooking" (ngSubmit)="onSubmit()">
+      <div class="container">
+        <div class="w-form">
+          <div class="row form-group">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-4 my-auto">
+                  <label for="checkInDate" class="text-lb-search"><span class="color-red">*</span>Ngày Nhận
+                    Phòng</label>
+                </div>
+                <div class="col-8">
+                  <input formControlName="checkInDate" min="{{today}}" type="date" class="form-control" [ngClass]="{
+                      'is-invalid':
+                        submitted && formBooking.controls.checkInDate.errors
+                    }" />
+                  <div *ngIf="submitted && formBooking.controls.checkInDate.errors">
+                    <div *ngIf="formBooking.controls.checkInDate.errors.required">
+                      {{ isEmpty }}
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+              <div class="row">
+                <div class="col-4"></div>
+                <div class="col-8">
+                  <p
+                  *ngIf="formBooking.touched && formBooking.invalid"
+                  class="text-white"
+                >
+                  Ngày nhận phòng lớn hơn hôm Nay
+                </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col-4 my-auto">
+                  <label for="numberOfRoom" class="text-lb-search"><span class="color-red">*</span>Số Lượng
+                    Phòng</label>
+                </div>
+                <div class="col-8">
+                  <select formControlName="numberOfRoom" class="form-select" aria-label="Default select example"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && formBooking.controls.numberOfRoom.errors
+                    }">
+                    <option selected></option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                  </select>
+                  <div *ngIf="
+                      submitted && formBooking.controls.numberOfRoom.errors
+                    ">
+                    <div *ngIf="formBooking.controls.numberOfRoom.errors.required">
+                      {{ isEmpty }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--  -->
+          <div class="row form-group">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-4 my-auto">
+                  <label for="checkOutDate" class="text-lb-search"><span class="color-red">*</span>Ngày Trả
+                    Phòng</label>
+                </div>
+                <div class="col-8">
+                  <input formControlName="checkOutDate" type="date" class="form-control" [ngClass]="{
+                      'is-invalid':
+                        submitted && formBooking.controls.checkOutDate.errors
+                    }" min="{{defaultCheckOut}}"/>
+                  <div *ngIf="
+                      submitted && formBooking.controls.checkOutDate.errors
+                    ">
+                    <div *ngIf="formBooking.controls.checkOutDate.errors.required">
+                      {{ isEmpty }}
+                    </div>
+                  </div>
+                </div>
+               
+              </div>
+              <div class="row">
+                <div class="col-4"></div>
+                <div class="col-8">
+                  <p
+                  *ngIf="formBooking.touched && formBooking.invalid"
+                  class="text-white"
+                >
+                  Ngày nhận phòng nhỏ hơn ngày trả phòng
+                </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col-4 my-auto">
+                  <label for="numberOfAdult" class="text-lb-search"><span class="color-red">*</span>Người Lớn</label>
+                </div>
+                <div class="col-8">
+                  <select formControlName="numberOfAdult" class="form-select" aria-label="Default select example"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && formBooking.controls.numberOfAdult.errors
+                    }">
+                    <option selected></option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                  </select>
+                  <div *ngIf="
+                      submitted && formBooking.controls.numberOfAdult.errors
+                    ">
+                    <div *ngIf="formBooking.controls.numberOfAdult.errors.required">
+                      {{ isEmpty }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--  -->
+          <div class="row form-group">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-4 my-auto">
+                  <label for="numberOfChild" class="text-lb-search"><span class="color-red">*</span> Trẻ Em</label>
+                </div>
+                <div class="col-8">
+                  <select formControlName="numberOfChild" class="form-select" aria-label="Default select example"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && formBooking.controls.numberOfChild.errors
+                    }">
+                    <option selected></option>
+                    <option value="0">0</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                  </select>
+                  <div *ngIf="
+                      submitted && formBooking.controls.numberOfChild.errors
+                    ">
+                    <div *ngIf="formBooking.controls.numberOfChild.errors.required">
+                      {{ isEmpty }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col-4"></div>
+                <div class="col-8 text-end">
+                  <button class="fm-btn-y" (click)="loadSnipper()">
+                    Tìm Kiếm
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- booking detail -->
+  <div class="container">
+    <div class="my-5 row w-form">
+      <div class="col-3 selective">
+        <div class="my-3">
+          <div class="my-auto">
+            <p class="text-title">Chọn Lọc Theo</p>
+          </div>
+          <hr>
+          <p class="text-content">Giá Phòng</p>
+          <div *ngFor="let item of checkBoxArray" class="mb-2">
+            <input
+              type="{{ item.type }}"
+              value="{{ item.id }}"
+              (click)="onChange($event)"
+              class="me-2"
+            />
+            <label for="">{{ item.rangePrice }}</label>
+          </div>
+        </div>
+      </div>
+      <div class="col-1 px-0"></div>
+      <!-- booking detail order-->
+      <div class="col-8 row">
+        <div *ngFor="
+            let t of typeRoomList
+              | paginate
+                : {
+                    itemsPerPage: tableSize,
+                    currentPage: page,
+                    totalItems: count
+                  }
+          " class="col-6">
+          <a [routerLink]="[
+              './recep-booking-detail/',
+              t.typeRoomID,
+              informationSearch.checkInDate,
+              informationSearch.checkOutDate,
+              informationSearch.numberOfRoom,
+              t.price,
+              t.typeRoomName
+            ]">
+            <img src="{{t.firstImageBase64}}" alt="" class="img-box" />
+          </a>
+          <div class="d-flex justify-content-between my-2">
+            <p class="mb-0 fm-text">{{ t.price | number }} VNĐ</p>
+            <p class="text-end fm-text mb-0">Còn {{ t.totalRoom }} phòng</p>
+          </div>
+          <div class="d-flex justify-content-between my-2">
+            <div>
+              <p class="fm-text my-auto">{{ t.typeRoomName }}</p>   
+            </div>
+            <div class="my-auto">
+              <ngb-rating
+                [(rate)]="currentRate"
+                [readonly]="true"
+                [max]="5"
+                class="fm-icon-star"
+              ></ngb-rating>
+            </div>
+          </div>
+          <div class="my-2">
+            <div class="d-flex justify-content-start">
+              <div *ngIf="checkCancel" class="can-cancel me-2">
+                <p class="my-0 fm-text-note">
+                  <i class="pi pi-check size-icon"></i> Có thể hủy phòng
+                </p>
+              </div>
+              <div *ngIf="checkCancel == false" class="not-cancel">
+                <p class="my-0 fm-text-cancel">
+                  <i class="pi pi-times size-icon"></i> Không thể hủy phòng
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="icon-box d-flex justify-content-between">
+            <div class="d-flex justify-content-around">
+              <img src="/assets/images/manage-room/icon-bed.jpg" alt="" class="img-box-icon" />
+              <p class="text-icon">{{ t.numberOfBed }}</p>
+            </div>
+            <div class="d-flex justify-content-around">
+              <img src="/assets/images/manage-room/icon=bathtub.jpg" alt="" class="img-box-icon" />
+              <p class="text-icon">{{ t.numberOfBathRoom }}</p>
+            </div>
+            <div class="d-flex justify-content-around">
+              <img src="/assets/images/manage-room/icon-people.jpg" alt="" class="img-box-icon" />
+              <p class="text-icon">{{ t.numberOfAdult }}</p>
+            </div>
+            <div class="d-flex justify-content-around">
+              <img src="/assets/images/manage-room/icon-child.jpg" alt="" class="img-box-icon" />
+              <p class="text-icon">{{ t.numberOfChild }}</p>
+            </div>
+            <div class="d-flex justify-content-around">
+              <img src="/assets/images/manage-room/icon-balcony.jpg" alt="" class="img-box-icon" />
+              <p class="text-icon">{{ t.numberOfView }}</p>
+            </div>
+          </div>
+        </div>
+        <!--  -->
+
+        <div class="d-flex justify-content-center">
+          <div>
+            <pagination-controls previousLabel="Trước" nextLabel="Tiếp" (pageChange)="onTableDataChange($event)">
+            </pagination-controls>
+          </div>
+        </div>
+      </div>
+      <!-- pagination -->
+    </div>
+  </div>
+</main>

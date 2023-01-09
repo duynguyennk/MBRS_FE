@@ -1,0 +1,166 @@
+  .img-box {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
+  .fm-title{
+    color: #ad8658;
+    font-family: Lobster;
+    font-size: 2.5rem;
+    text-align: center;
+  }
+  .room-infor {
+    font-weight: 600;
+    text-align: center;
+    color: white;
+    border: solid;
+    background-color: #ad8658;
+    border-radius: 12px;
+    width: 8vw;
+    height: 16vh;
+    position: relative;
+  }
+  .room-detail {
+    margin: 3rem 0;
+  }
+  
+  .title{
+    font-weight: 500;
+    font-size: 1.3rem;
+  }
+  .fm-text-infor {
+    font-size: 0.8rem;
+    font-weight: 400;
+  }
+  .pos-center-xy {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .description {
+    margin: 3rem 0;
+  }
+  .content {
+    text-align: justify;
+    line-height: 40px;
+    color: #9a9a9a;
+    font-size: 1.2rem;
+  }
+  .text-param-1 {
+    font-size: 1.2rem;
+  }
+  .border-service {
+    border: solid #ffffff;
+    background: #ffffff;
+    box-shadow: 0px 0px 8px rgba(194, 198, 204, 0.5);
+    border-radius: 6px;
+    padding: 1rem;
+    width: 250px;
+    height: auto;
+  
+  }
+  .stars > label{
+    font-size: 1rem;
+  }
+  .color-star{
+    color: #E7EB39;
+  }
+  .img-box-icon{
+    width: 70px;
+    height: auto;
+  }
+  .icon-user-name{
+    font-size: 1.1rem;
+    font-weight: 500;
+    display: flex;
+    margin-bottom: 20px;
+  }
+  .date{
+    font-size: 1rem;
+    font-weight: 400;
+  }
+  .comment-content{
+    text-align: justify;
+    font-size: 1rem;
+    line-height: 2rem;
+  }
+  /* book-now */
+  .book-now {
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0px 0px 16px rgba(194, 198, 204, 0.6);
+    text-align: center;
+  }
+  .price-book-room {
+    font-size: 1.3rem;
+    font-weight: 500;
+  }
+  .text-phone{
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  /*  */
+  div.stars {
+    width: 100%;
+    display: inline-block;
+  }
+   
+  input.star { display: none; }
+   
+  label.star {
+    float: right;
+    padding: 8px 0.8rem;
+    font-size: 20px;
+    color: #444;
+    transition: all .2s;
+    /* text-align: center; */
+  }
+   
+  input.star:checked ~ label.star:before {
+    content: '\f005';
+    color: #FD4;
+    transition: all .25s;
+  }
+   
+  input.star-5:checked ~ label.star:before {
+    color: #FE7;
+    text-shadow: 0 0 20px #952;
+  }
+   
+  input.star-1:checked ~ label.star:before { color: #F62; }
+   
+  label.star:hover { transform: rotate(-15deg) scale(1.3); }
+   
+  label.star:before {
+    content: '\f006';
+    font-family: FontAwesome;
+  }
+  @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap");
+/* important */
+.rating-progress .progress {
+	/* float: left; */
+	width: calc(100% - 150px);
+	border-radius: 10px;
+}
+/* end border-radius */
+.rating-progress .progress .bg-warning {
+	background-color: #ffc107 !important;
+	border-radius: 10px;
+}
+
+.rating-progress{
+  margin: 1.5rem 0;
+}
+.img-icon{
+  width: 1.3vw;
+  height: 2.6vh;
+}
+.fm-text{
+  font-size: 1rem;
+}
+.if-maps{
+  width: 100%;
+  height: 50vh;
+  margin: 1rem 0;
+}

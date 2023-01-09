@@ -1,0 +1,113 @@
+
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<main class="container">
+  <div class="admin">
+    <p class="fm-title">
+      Chức Năng Quản Lý
+    </p>
+  </div>
+  <div class="separator-line my-3">
+    <svg
+      width="100"
+      height="6"
+      viewBox="0 0 140 6"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <rect width="140" height="3" rx="3" fill="#484848" />
+    </svg>
+  </div>
+  <!-- <div class="manage-account"> -->
+  <div class="row fm-border-m">
+    <!-- quan ly phong -->
+    <div class="col-3 pe-0">
+      <a routerLink="./manage-room-infor">
+        <button class="manage-account-employee p-4 border border-2 border-dark">
+          <!-- icon manage-room -->
+          <img
+            src="/assets/images/manage-room/hostel.png"
+            alt=""
+            class="icon-box"
+          />
+          <p class="fw-bold mt-2">Quản Lý <br />Phòng</p>
+        </button>
+      </a>
+    </div>
+    <!-- quan ly dich vu -->
+    <div class="col-3 ps-0">
+      <a routerLink="./mana-room-service">
+        <button
+          class="manage-account-customer p-4 border border-2 border-dark mx-3"
+        >
+          <!-- icon manage-service -->
+          <img
+            src="/assets/images/manage-room/christmas-bell.png"
+            alt=""
+            class="icon-box"
+          />
+          <p class="fw-bold mt-2">
+            Quản Lý <br />
+            Dịch Vụ
+          </p>
+        </button>
+      </a>
+    </div>
+    <!-- quan ly loai phong va tang -->
+   <div class="col-3">
+    <a routerLink="./mana-room-types-floor">
+      <button
+        class="manage-account-customer p-4 border border-2 border-dark me-3"
+      >
+        <!-- icon manage-service -->
+        <img
+          src="/assets/images/manage-room/hotel.png"
+          alt=""
+          class="icon-box"
+        />
+        <p class="fw-bold mt-2">
+          Quản Lý <br />
+          Loại Phòng Và Tầng
+        </p>
+      </button>
+    </a>
+   </div>
+    <!--  -->
+    <div class="col-3 mb-4">
+      <a routerLink="./mana-service-types">
+        <button
+          class="manage-account-customer p-4 border border-2 border-dark"
+        >
+          <!-- icon manage-service -->
+          <img
+            src="/assets/images/manage-room/diet.png"
+            alt=""
+            class="icon-box"
+          />
+          <p class="fw-bold mt-2">
+            Quản Lý <br />
+            Loại Dịch Vụ
+          </p>
+        </button>
+      </a>
+    </div>
+    <div class="col-3">
+      <a routerLink="./mana-employee-behavior">
+        <button
+          class="manage-account-customer p-4 border border-2 border-dark"
+        >
+          <!-- icon manage-service -->
+          <img
+            src="/assets/images/manage-room/active.png"
+            alt=""
+            class="icon-box"
+          />
+          <p class="fw-bold mt-2">
+           Theo Dõi <br />
+           Hoạt Động Nhân Viên
+          </p>
+        </button>
+      </a>
+    </div>
+  </div>
+  <!-- </div> -->
+</main>

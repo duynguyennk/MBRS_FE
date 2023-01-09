@@ -1,0 +1,84 @@
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<main class="container">
+<div class="w-form-60">
+  <div class="customer-text">
+    <p class="fm-title">
+      Tạo Thông Tin Xe Đạp
+    </p>
+  </div>
+  <hr>
+  <p class="remind">Điền đầy đủ thông tin xe đạp bên dưới để tạo</p>
+  <form [formGroup]="RentBicycleForm" (ngSubmit)="onSubmit()">
+    <!-- edit infor in form -->
+    <div class="fm-border mb-5">
+      <div class="form-group mb-4">
+        <label for="bikeCode" class="title-input"><span class="color-red">*</span> Mã Xe Đạp </label>
+        <input formControlName="bikeCode" type="text" [ngClass]="{'is-invalid':submitted && RentBicycleForm.controls.bikeCode.errors}" minlength="2" maxlength="50" class="form-control" placeholder="VD: B01"/>
+        <div *ngIf="submitted && RentBicycleForm.controls.bikeCode.errors" class="text-danger">
+          <div *ngIf="RentBicycleForm.controls.bikeCode.errors.required"> 
+            {{isEmpty}}
+          </div>
+          <div *ngIf="RentBicycleForm.controls.bikeCode.errors.minlength">
+            {{atLeast2C}}
+          </div>
+          <div *ngIf="RentBicycleForm.controls.bikeCode.errors.pattern">
+            {{atLeastNum_Let}}
+          </div>
+        </div>
+      </div>
+      <div class="form-group mb-4">
+        <label for="bikeName" class="title-input"><span class="color-red">*</span> Tên Xe Đạp </label>
+        <input formControlName="bikeName" [ngClass]="{'is-invalid':submitted && RentBicycleForm.controls.bikeName.errors}" minlength="2" maxlength="50" type="text" class="form-control" placeholder="VD: Xe Tiêu Chuẩn 1"/>
+        <div *ngIf="submitted && RentBicycleForm.controls.bikeName.errors" class="text-danger">
+          <div *ngIf="RentBicycleForm.controls.bikeName.errors.required"> 
+            {{isEmpty}}
+          </div>
+          <div *ngIf="RentBicycleForm.controls.bikeName.errors.minlength">
+            {{atLeast2C}}
+          </div>
+          <div *ngIf="RentBicycleForm.controls.bikeName.errors.pattern">
+            {{atLeastNum_Let}}
+          </div>
+        </div>
+      </div>
+      <div class="form-group mb-4">
+        <label for="typeBikeID" class="title-input"><span class="color-red">*</span> Loại Xe Đạp </label>
+        <select formControlName="typeBikeID" [ngClass]="{'is-invalid':submitted && RentBicycleForm.controls.typeBikeID.errors}" class="form-select" (ngModelChange)="onchangeSelect($event)">
+          <option *ngFor="let t of typeBikeList" value="{{ t.typeBikeID }}">
+            {{t.typeBikeName}}
+          </option>
+        </select>
+        <div *ngIf="submitted && RentBicycleForm.controls.typeBikeID.errors" class="text-danger">
+          <div *ngIf="RentBicycleForm.controls.typeBikeID.errors.required"> 
+            {{isEmpty}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  -->
+    <p *ngIf="detailBikeInformation != null" class="fm-text">Thông Tin Loại Xe Đạp</p>
+    <div *ngIf="detailBikeInformation != null" class="fm-border mb-5">
+      <div class="">
+        <ul class="mb-0">
+          <li class="mb-2 title-input">Giá: <span class="title-input">{{detailBikeInformation[0].price}}</span> VNĐ</li>
+          <li class="title-input">Số Lượng Chỗ Ngồi: <span class="title-input">{{detailBikeInformation[0].numberOfSeat}}</span></li>
+        </ul>
+      </div>
+    </div>
+    <!--  -->
+    <p *ngIf="detailBikeInformation != null" class="fm-text">Ảnh Xe</p>
+    <div *ngIf="detailBikeInformation != null" class="d-flex justify-content-between">
+      <img src="{{detailBikeInformation[0].imageBase64}}" alt="" class="img-box">
+    </div>
+    <!--  -->
+    <div class="fm-btn-cancel text-end my-5">
+      <button class="fw-bold btn px-4 py-2" (click)="cancelForm()">
+        <i class="pi pi-times"></i> Huỷ
+      </button>
+      <button class="fm-btn-y" type="submit">
+        Tạo
+      </button>
+    </div>
+  </form>
+</div>
+</main>

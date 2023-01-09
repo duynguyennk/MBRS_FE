@@ -1,0 +1,50 @@
+main{
+    width: 450px !important;
+}
+.fm-content-dialog{
+    padding: 0 1rem;
+}
+.fm-header-dialog{
+    background-color: #003c7a;
+    padding: 1rem;
+    font-weight: 500;
+    font-size: 1.2rem;
+    color: white;
+}
+.size-icon{
+    font-size: 13px;
+}
+.size-text{
+    font-size: 16px;
+}
+.fm-content-dialog{
+    margin: auto;
+}
+.text-content{
+    font-size: 1rem;
+    font-weight: 450;
+}
+.fm-btn-g{
+    width: 7vw;
+    height: 3.8vh;
+    background-color: #ad8658;
+    color: white;
+    font-size: 1.3rem;
+    font-weight: 400;
+    text-align: center;
+}
+/* #ad8658 */
+::ng-deep .mat-dialog-container{
+    padding: 0;
+}
+.fm-btn-g{
+    padding: 0;
+}
+i{
+    font-size: 1.4rem;
+}
+button:hover{
+    background-color: #003c7a;
+    box-shadow: 2px 2px 2px 2px rgb(204, 204, 204);
+    color: white;
+}

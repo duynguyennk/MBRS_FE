@@ -1,0 +1,142 @@
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<main class="container">
+    <div class="w-form">
+      <p class="fm-title">
+        Xác Nhận Hóa Đơn Dịch Vụ Xe Đạp
+      </p>
+      <div class="separator-line my-2">
+        <svg width="100" height="6" viewBox="0 0 140 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="140" height="3" rx="3" fill="#484848" />
+        </svg>
+      </div>
+      <div class="form-infor mb-5">
+        <p class="title">Chi tiết thuê</p>
+        <div class="fm-border">
+          <div class="pos-form row">
+            <div class="col-6">
+              <p class="text-capitalize ms-3">Tên Loại Xe:</p>
+            </div>
+            <div class="col-6">
+              <p>{{typeBikeName}}</p>
+            </div>
+          </div>
+          <div class="pos-form row">
+            <div class="col-6">
+              <p class="ms-3">Ngày Thuê:</p>
+            </div>
+            <div class="col-6">
+              <p>{{dateRent}}</p>
+            </div>
+          </div>
+          <div class="pos-form row">
+            <div class="col-6">
+              <p class="ms-3">Giờ Nhận Xe:</p>
+            </div>
+            <div class="col-6">
+              <p>{{hoursGetBike}}</p>
+            </div>
+          </div>
+          <div class="pos-form row">
+            <div class="col-6">
+              <p class="ms-3">Số Lượng Giờ Thuê:</p>
+            </div>
+            <div class="col-6">
+              <p>{{timeHire}} giờ</p>
+            </div>
+          </div>
+          <div class="pos-form row">
+            <div class="col-6">
+              <p class="ms-3">Số Lượng:</p>
+            </div>
+            <div class="col-6">
+              <p>{{numberOfBike}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- form submit -->
+      <div class="form-infor mb-5">
+        <p class="title">Thông Tin Khách Lưu Trú</p>
+        <div class="fm-border">
+          <div class="pos-form row">
+            <div class="col-6">
+              <p class="text-capitalize ms-3">tên khách lưu trú:</p>
+            </div>
+            <div class="col-6">
+              <p>{{customerInformation[0].fullName}}</p>
+            </div>
+          </div>
+          <div class="pos-form row">
+            <div class="col-6">
+              <p class="ms-3">Số Điện Thoại:</p>
+            </div>
+            <div class="col-6">
+              <p>{{customerInformation[0].phoneNumber}}</p>
+            </div>
+          </div>
+          <div class="pos-form row">
+            <div class="col-6">
+              <p class="ms-3">Email:</p>
+            </div>
+            <div class="col-6">
+              <p>{{customerInformation[0].email}}</p>
+            </div>
+          </div>
+          <div class="pos-form row">
+            <div class="col-6">
+              <p class="ms-3">CCCD:</p>
+            </div>
+            <div class="col-6">
+              <p>{{customerInformation[0].identifyNumber}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- price detail -->
+      <div class="form-infor mb-5">
+        <p class="title">Chi Tiết Giá</p>
+        <div class="fm-border">
+          <div class="pos-form row">
+            <div class="col-6">
+              <p class="text-capitalize ms-3">Tổng Giá Trị:</p>
+            </div>
+            <div class="col-6">
+              <p>{{totalPrice | number}} VNĐ</p>
+            </div>
+          </div>
+          <hr>
+          <div class="pos-form row my-4">
+            <div class="col-6">
+              <p class="ms-3">Chi Tiết:</p>
+            </div>
+            <div class="col-6">
+              <!-- <p></p> -->
+            </div>
+          </div>
+          <div class="pos-form row">
+            <div class="col-6">
+              <p class="ms-3">-({{numberOfBike}}x) {{typeBikeName}} ({{timeHire}} tiếng)</p>
+            </div>
+            <div class="col-6">
+              <p>{{totalPrice | number}} VNĐ</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-infor row">
+        <div class="col-6">
+            <p>Khi nhấn vào nút này bạn
+                công nhận mình đã đọc và
+                đồng ý với các Điều khoản & Điều kiện và
+                Chính sách quyền riêng tư của Westlake Hotel</p>
+        </div>
+        <div class="col-6 text-end">
+            <button (click)="createLinkPayment()" class="fm-btn-y">
+                Tiếp Tục Thanh Toán
+              </button>
+            
+        </div>
+      </div>
+    </div>
+  </main>
+  

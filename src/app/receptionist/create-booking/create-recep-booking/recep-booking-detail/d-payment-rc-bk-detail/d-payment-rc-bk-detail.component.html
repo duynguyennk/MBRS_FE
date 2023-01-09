@@ -1,0 +1,252 @@
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<main class="container">
+  <form [formGroup]="customerForm" (ngSubmit)="onSubmit()" class="fm-border">
+    <p class="mb-0 fm-title">Đặt Phòng Khách Sạn</p>
+    <div class="separator-line my-2">
+      <svg width="100" height="6" viewBox="0 0 140 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="140" height="3" rx="3" fill="#484848" />
+      </svg>
+    </div>
+    <p class="title">Điền thông tin người liên lạc và khách bên dưới</p>
+
+    <!-- 1 -->
+
+    <!-- 2  -->
+
+    <!-- 3 -->
+    <div class="contact">
+      <div class="row">
+        <div class="col-3">
+          <p class="title">Thông Tin Liên Hệ</p>
+        </div>
+        <div class="col-3"></div>
+        <div class="col-4 my-auto">
+          <!-- <label for="checkInformation" class="fm-text"><span class="color-red">*</span>Tìm kiếm thông tin khách hàng</label> -->
+          <input formControlName="checkInformation" minlength="2" maxlength="50" type="text" class="form-control"
+            (ngModelChange)="onchangeSelect($event)" placeholder="Tìm kiếm thông tin khách hàng" />
+        </div>
+        <div class="col-2 my-auto text-end">
+          <a (click)="searchInformation()" class="fm-btn-y">Tìm Kiếm</a>
+        </div>
+      </div>
+
+      <div class="form-border p-contact-info bg-grey-20" *ngIf="indentityOfCustomer == null">
+        <div class="form-group mb-4">
+          <label for="fullName" class="fm-text"><span class="color-red">*</span>Tên Người Liên Hệ</label>
+          <input formControlName="customerID" type="hidden" class="form-control" />
+          <input formControlName="fullName" [ngClass]="{
+              'is-invalid': submitted && customerForm.controls.fullName.errors
+            }" minlength="2" maxlength="50" type="text" class="form-control" />
+          <div *ngIf="submitted && customerForm.controls.fullName.errors" class="text-danger">
+            <div *ngIf="customerForm.controls.fullName.errors.required">
+              {{ isEmpty }}
+            </div>
+            <div *ngIf="customerForm.controls.fullName.errors.pattern">
+              {{ isLetter }}
+            </div>
+            <div *ngIf="customerForm.controls.fullName.errors.minlength">
+              {{ atLeast2C }}
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-4">
+          <label for="identifyNumber" class="fm-text"><span class="color-red">*</span>CCCD/CMTND</label>
+          <input formControlName="identifyNumber" [ngClass]="{
+              'is-invalid':
+                submitted && customerForm.controls.identifyNumber.errors
+            }" minlength="9" maxlength="15" type="text" class="form-control" />
+          <div *ngIf="submitted && customerForm.controls.identifyNumber.errors" class="text-danger">
+            <div *ngIf="customerForm.controls.identifyNumber.errors.required">
+              {{ isEmpty }}
+            </div>
+            <div *ngIf="customerForm.controls.identifyNumber.errors.pattern">
+              {{ isNum }}
+            </div>
+            <div *ngIf="customerForm.controls.identifyNumber.errors.minlength">
+              {{ atLeast12C }}
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-4">
+          <label for="email" class="fm-text"><span class="color-red">*</span>Email</label>
+          <input formControlName="email" [ngClass]="{
+              'is-invalid': submitted && customerForm.controls.email.errors
+            }" minlength="4" maxlength="50" type="email" class="form-control" />
+          <div *ngIf="submitted && customerForm.controls.email.errors" class="text-danger">
+            <div *ngIf="customerForm.controls.email.errors.required">
+              {{ isEmpty }}
+            </div>
+            <div *ngIf="customerForm.controls.email.errors.email">
+              {{ isEmail }}
+            </div>
+            <div *ngIf="customerForm.controls.email.errors.minlength">
+              {{ atLeast4C }}
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-4">
+          <label for="dateOfBirth" class="fm-text"><span class="color-red">*</span>Ngày Sinh</label>
+          <input formControlName="dateOfBirth" max="{{defaultCheckYears}}" [ngClass]="{
+              'is-invalid':
+                submitted && customerForm.controls.dateOfBirth.errors
+            }" type="date" class="form-control" />
+          <div *ngIf="submitted && customerForm.controls.dateOfBirth.errors" class="text-danger">
+            <div *ngIf="customerForm.controls.dateOfBirth.errors.required">
+              {{ isEmpty }}
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-4">
+          <label for="phoneNumber" class="fm-text"><span class="color-red">*</span>Số Điện Thoại</label>
+          <input formControlName="phoneNumber" [ngClass]="{
+              'is-invalid':
+                submitted && customerForm.controls.phoneNumber.errors
+            }" minlength="10" maxlength="11" type="text" class="form-control" />
+          <div *ngIf="submitted && customerForm.controls.phoneNumber.errors" class="text-danger">
+            <div *ngIf="customerForm.controls.phoneNumber.errors.required">
+              {{ isEmpty }}
+            </div>
+            <div *ngIf="customerForm.controls.phoneNumber.errors.pattern">
+              {{ isPhone }}
+            </div>
+            <div *ngIf="customerForm.controls.phoneNumber.errors.minlength">
+              {{ atLeast10C }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-border p-contact-info bg-grey-20" *ngIf="indentityOfCustomer != null ">
+        <div class="form-group mb-4">
+          <label for="fullName" class="fm-text"><span class="color-red">*</span>Tên Người Liên Hệ</label>
+          <input readonly formControlName="fullName" [ngClass]="{
+              'is-invalid': submitted && customerForm.controls.fullName.errors
+            }" minlength="2" maxlength="50" type="text" class="form-control" />
+          <div *ngIf="submitted && customerForm.controls.fullName.errors" class="text-danger">
+            <div *ngIf="customerForm.controls.fullName.errors.required">
+              {{ isEmpty }}
+            </div>
+            <div *ngIf="customerForm.controls.fullName.errors.pattern">
+              {{ isLetter }}
+            </div>
+            <div *ngIf="customerForm.controls.fullName.errors.minlength">
+              {{ atLeast2C }}
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-4">
+          <label for="identifyNumber" class="fm-text"><span class="color-red">*</span>CCCD/CMTND</label>
+          <input readonly formControlName="identifyNumber" [ngClass]="{
+              'is-invalid':
+                submitted && customerForm.controls.identifyNumber.errors
+            }" minlength="9" maxlength="15" type="text" class="form-control" />
+          <div *ngIf="submitted && customerForm.controls.identifyNumber.errors" class="text-danger">
+            <div *ngIf="customerForm.controls.identifyNumber.errors.required">
+              {{ isEmpty }}
+            </div>
+            <div *ngIf="customerForm.controls.identifyNumber.errors.pattern">
+              {{ isNum }}
+            </div>
+            <div *ngIf="customerForm.controls.identifyNumber.errors.minlength">
+              {{ atLeast12C }}
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-4">
+          <label for="email" class="fm-text"><span class="color-red">*</span>Email</label>
+          <input readonly formControlName="email" [ngClass]="{
+              'is-invalid': submitted && customerForm.controls.email.errors
+            }" minlength="4" maxlength="50" type="email" class="form-control" />
+          <div *ngIf="submitted && customerForm.controls.email.errors" class="text-danger">
+            <div *ngIf="customerForm.controls.email.errors.required">
+              {{ isEmpty }}
+            </div>
+            <div *ngIf="customerForm.controls.email.errors.email">
+              {{ isEmail }}
+            </div>
+            <div *ngIf="customerForm.controls.email.errors.minlength">
+              {{ atLeast4C }}
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-4">
+          <label for="dateOfBirth" class="fm-text"><span class="color-red">*</span>Ngày Sinh</label>
+          <input readonly formControlName="dateOfBirth" [ngClass]="{
+              'is-invalid':
+                submitted && customerForm.controls.dateOfBirth.errors
+            }" type="date" class="form-control" />
+          <div *ngIf="submitted && customerForm.controls.dateOfBirth.errors" class="text-danger">
+            <div *ngIf="customerForm.controls.dateOfBirth.errors.required">
+              {{ isEmpty }}
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-4">
+          <label for="phoneNumber" class="fm-text"><span class="color-red">*</span>Số Điện Thoại</label>
+          <input readonly formControlName="phoneNumber" [ngClass]="{
+              'is-invalid':
+                submitted && customerForm.controls.phoneNumber.errors
+            }" minlength="10" maxlength="11" type="text" class="form-control" />
+          <div *ngIf="submitted && customerForm.controls.phoneNumber.errors" class="text-danger">
+            <div *ngIf="customerForm.controls.phoneNumber.errors.required">
+              {{ isEmpty }}
+            </div>
+            <div *ngIf="customerForm.controls.phoneNumber.errors.pattern">
+              {{ isPhone }}
+            </div>
+            <div *ngIf="customerForm.controls.phoneNumber.errors.minlength">
+              {{ atLeast10C }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 5 -->
+
+    <!-- 6 -->
+    <div class="price-detail">
+      <p class="title">Chi Tiết Giá</p>
+      <div class="form-border bg-grey-20 p-contact-info">
+        <div class="pos-form row">
+          <div class="col-6">
+            <p class="text-capitalize ms-3">Tổng Giá Trị:</p>
+          </div>
+          <div class="col-6">
+            <p class="price text-end">{{ totalPrice | number }} VNĐ</p>
+          </div>
+        </div>
+        <hr />
+        <div class="pos-form row my-4">
+          <div class="col-6">
+            <p class="ms-3">Chi Tiết:</p>
+          </div>
+          <div class="col-6">
+            <!-- <p></p> -->
+          </div>
+        </div>
+        <div class="pos-form row">
+          <div class="col-6">
+            <p class="ms-3">
+              ({{ searchInformationJason.numberOfRoom }}x)
+              {{ searchInformationJason.typeRoomName }} ({{ days }} đêm)
+            </p>
+          </div>
+          <div class="col-6">
+            <p class="price text-end">{{ totalPrice | number }} VNĐ</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- last -->
+    <div class="row">
+      <div class="col-6">
+        <p class="fm-text-u">
+          Khi nhấn vào nút này bạn công nhận mình đã đọc và đồng ý với các Điều
+          khoản & Điều kiện và Chính sách quyền riêng tư của Westlake Hotel
+        </p>
+      </div>
+      <div class="col-6 text-end">
+        <button type="submit" class="fm-btn-y">Tiếp Tục Đặt Chỗ</button>
+      </div>
+    </div>
+  </form>
+</main>

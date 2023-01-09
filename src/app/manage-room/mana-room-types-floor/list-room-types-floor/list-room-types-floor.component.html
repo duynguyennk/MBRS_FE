@@ -1,0 +1,67 @@
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<main class="container">
+    <div class="admin">
+      <p class="fm-title">
+        Quản Lý Loại Phòng Và Tầng
+      </p>
+    </div>
+    <div class="separator-line my-3">
+      <svg
+        width="100"
+        height="6"
+        viewBox="0 0 140 6"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect width="140" height="3" rx="3" fill="#484848" />
+      </svg>
+    </div>
+    <div class="manage-account d-flex text-center">
+      <!-- dịch vụ thuê xe đạp -->
+      <a routerLink="./mana-room-floor">
+        <button class="manage-account-employee p-4 border border-2 border-dark">
+          <img
+          src="/assets/images/manage-room/hotel.png"
+          alt=""
+          class="icon-box"
+        />
+          <p class="fw-bold mt-2">Loại Tầng</p>
+        </button>
+      </a>
+      <!-- dich vu đồ ăn-->
+      <a routerLink="./mana-room-types">
+        <button
+          class="manage-account-customer p-4 border border-2 border-dark mx-3"
+        >
+        <img
+        src="/assets/images/manage-room/hotel.png"
+        alt=""
+        class="icon-box"
+      />
+  
+          <p class="fw-bold mt-2">
+           Loại Phòng
+          </p>
+        </button>
+      </a>
+      <!-- dịch vụ đưa đón sân bay -->
+      <!-- <a routerLink="./shuttle-type">
+        <button
+          class="manage-account-customer p-4 border border-2 border-dark"
+        >
+          <img
+            src="/assets/images/manage-room/hotel.png"
+            alt=""
+            class="icon-box"
+          />
+  
+          <p class="fw-bold mt-2">
+           Loại <br />
+            Đưa Đón Sân Bay
+          </p>
+        </button>
+      </a> -->
+    </div>
+    <!-- </div> -->
+  </main>
+  

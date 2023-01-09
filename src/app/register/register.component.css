@@ -1,0 +1,48 @@
+main {
+  padding: 3rem;
+  position: relative;
+  top: 12%;
+}
+.w-form{
+  width: 80%;
+  margin: auto;
+}
+form {
+  width: 100%;
+  margin: auto 0;
+  background: #ffffff;
+  padding: 40px;
+  /* box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); */
+  /* border-radius: 8px; */
+}
+.pos-captcha{
+  text-align: -webkit-center;
+  margin-bottom: 3rem;
+}
+.btn-create-customer {
+  background-color: #ad8658;
+  border: none;
+  color: white;
+}
+.content-main{
+  margin: 1rem 0;
+}
+.text-invalid {
+  color: rgba(72, 72, 72, 0.7);
+  font-size: 12px;
+}
+.color-red {
+  color: red;
+}
+.btn-dele-sub > button {
+  width: 100% !important;
+}
+.img-box {
+  width: 100%;
+  height: -webkit-fill-available;
+}
+.box-main {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background: #ffffff;
+  border: 1px solid rgb(212, 212, 212);
+}

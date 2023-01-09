@@ -1,0 +1,27 @@
+  .title {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin: 1.5rem 0;
+  }
+  .fm-border {
+    background: #fafafa;
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    padding: 1.5rem;
+    /* width: 50vw; */
+  }
+ 
+  .pos-form{
+      font-size: 1rem;
+  }
+  .pos-form > div:last-child > p{
+      font-weight: 500;
+  }
+  .w-form{
+    width: 80%;
+    margin: auto;
+  }
+  .w-100{
+    width: 100%;
+  }

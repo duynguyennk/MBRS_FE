@@ -1,0 +1,145 @@
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<main class="container-fluid">
+  <div class="employee-text">
+    <p class="fm-title">Quản Lý Đồ Ăn</p>
+  </div>
+  <hr />
+  <div class="mana-empl p-3">
+    <p class="fw-bold">Tìm Kiếm:</p>
+    <div class="d-flex justify-content-between my-4">
+      <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+        <div class="mana-empl-search row">
+          <div class="col-4 my-auto">
+            <input formControlName="filterValue" type="text" placeholder="Tìm Kiếm" class="form-control me-2"
+              minlength="1" maxlength="150" />
+          </div>
+          <div class="col-4 my-auto">
+            <select formControlName="filterName" [ngClass]="{
+              'is-invalid': submitted && searchForm.controls.filterName.errors
+            }" class="form-select" id="inputGroupSelect01">
+              <option value="all">Tất Cả</option>           
+              <option value="order_code">Mã HĐ</option>
+              <option value="full_name">Tên Khách</option>
+              <option value="user_name">Tên Tài Khoản</option>
+              <option value="phone_number">Số Điện Thoại</option>
+              <option value="department_name">Trạng Thái</option>
+            </select>
+          </div>
+          <div class="col-4">
+            <button class="fm-btn-y" type="submit">Tìm Kiếm</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4"></div>
+          <div class="col-4">
+            <div
+              *ngIf="submitted && searchForm.controls.filterName.errors"
+              class="text-danger text-center"
+            >
+              <div *ngIf="searchForm.controls.filterName.errors.required">
+                {{ isEmpty }}
+              </div>
+            </div>
+          </div>
+          <div class="col-4"></div>
+        </div>
+      </form>
+      <div class="mana-empl-createAcc d-flex">
+        <a (click)="goToLink('https://sandbox.vnpayment.vn/merchantv2/Users/Login.htm?fbclid=IwAR2VJG7j-Q-UA6Qfwt3Boe4bTqYXpg9pKva15nHv-os6HsU7_eI_iylWB_A')"
+          class="me-3">
+          <img src="https://sandbox.vnpayment.vn/merchantv2/Styles/images/logo.png" alt="" class="img-logo">
+        </a>
+        <a routerLink="./order-food-booking">
+          <button type="button" class="btn btn-outline-secondary">
+            <i class="pi pi-plus"></i> Tạo Đơn
+          </button>
+        </a>
+      </div>
+    </div>
+    <div class="table-account text-center">
+      <table class="table">
+        <thead>
+          <tr class="text-white text-center">
+            <th class="my-auto">
+              <p class="mb-0">STT</p>
+            </th>
+            <th (click)="sort('')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Mã HĐ
+            </th>
+            <th (click)="sort('')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Tên Khách
+            </th>
+            <th (click)="sort('')" scope="col">
+              <i class="pi pi-sort align-middle"></i> SĐT
+            </th>
+            <th (click)="sort('')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Nội Dung TT
+            </th>
+            <th (click)="sort('')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Mã VNPAY
+            </th>
+            <th (click)="sort('')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Giá Trị
+            </th>
+            <th (click)="sort('')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Thời Gian TT
+            </th>
+            <th (click)="sort('')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Kết Quả TT
+            </th>
+            <th (click)="sort('')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Trạng Thái
+            </th>
+            <th scope="col">Thao Tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="
+          let e of orderFoodList
+            | paginate
+              : {
+                  itemsPerPage: tableSize,
+                  currentPage: page,
+                  totalItems: count
+                }
+            | orderBy: orderHeader:isDescOrder;
+          let i = index
+        ">
+            <td></td>
+            <td class="text-start">{{e.orderCode}}</td>
+            <td class="text-start">{{e.fullName}}</td>
+            <td>{{e.phoneNumber}}</td>
+            <td class="text-start">{{e.contentPayment}}</td>
+            <td>{{e.vnpTransactionNumber}}</td>
+            <td>{{e.price | number}}</td>
+            <td>{{e.convertDate}}</td>
+            <td style="color: red;" *ngIf="e.statusPayment !== '00' ">{{e.contentResultPayment}}</td>
+            <td style="color: green;" *ngIf="e.statusPayment == '00' ">Đã thanh toán</td>
+            <td style="color: red;" *ngIf="e.statusFood == 0 ">Đợi xác nhận</td>
+            <td style="color: green;" *ngIf="e.statusFood == 1 ">Đang chuẩn bị</td>
+            <td style="color: blue;" *ngIf="e.statusFood == 2 ">Đã giao đồ ăn</td>
+            <td>
+              <a *ngIf="e.statusFood == 0" routerLink="./"><i (click)="changeStatus(1,e.orderID,e.orderCode,e.fullName)"
+                  class="pi pi-cart-plus"></i></a>
+              <a *ngIf="e.statusFood == 1" routerLink="./"><i (click)="changeStatus(2,e.orderID,e.orderCode,e.fullName)"
+                  class="pi pi-hourglass"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <div>
+      <select (change)="onTableSizeChange($event)">
+        <option *ngFor="let size of tableSizes">
+          {{ size }}
+        </option>
+      </select>
+    </div>
+    <div>
+      <pagination-controls previousLabel="Trước" nextLabel="Tiếp" (pageChange)="onTableDataChange($event)">
+      </pagination-controls>
+    </div>
+  </div>
+</main>

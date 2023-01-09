@@ -1,0 +1,70 @@
+<app-header></app-header>
+<loading *ngIf="isLoading">{{isLoading}}</loading>
+<main class="container">
+  <div class="w-form-60">
+    <div class="feed-back">
+      <p class="text-capitalize fm-title">
+        đánh giá mức độ hài lòng của khách hàng
+      </p>
+  
+      <div class="separator-line my-3">
+        <svg
+          width="100"
+          height="6"
+          viewBox="0 0 140 6"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect width="140" height="3" rx="3" fill="#484848" />
+        </svg>
+      </div>
+    </div>
+    <form [formGroup]="feedback" (ngSubmit)="onSubmit()">
+      <div class="rating">
+          <div class="row">
+              <div class="col-5">
+                  <div class="d-flex justify-content-between">
+                      <p class="fm-text-rating">Tiện Nghi</p>
+                      <input formControlName="orderID" type="hidden"/>
+                      <ngb-rating formControlName="numberRatingConveniences" [max]="5"></ngb-rating>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                      <p class="fm-text-rating">Dịch Vụ</p>
+                      <ngb-rating formControlName="numberRatingService" [max]="5"></ngb-rating>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                      <p class="fm-text-rating">Khung Cảnh</p>
+                      <ngb-rating formControlName="numberRatingView" [max]="5"></ngb-rating>
+                  </div>
+              </div>
+              <div class="col-2"></div>
+              <div class="col-5">
+                  <div class="d-flex justify-content-between">
+                      <p class="fm-text-rating">Vệ Sinh</p>
+                      <ngb-rating formControlName="numberRatingHygiene" [max]="5"></ngb-rating>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                      <p class="fm-text-rating">Nhân Viên</p>
+                      <ngb-rating formControlName="numberRatingEmployee" [max]="5"></ngb-rating>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                      <p class="fm-text-rating">Vật Chất</p>
+                      <ngb-rating formControlName="numberRatingInterior" [max]="5"></ngb-rating>
+                  </div>
+              </div>
+          </div>
+        </div>
+        <div *ngIf="ratingID==null" class="form-floating my-5">
+          <textarea class="form-control" formControlName="contentRating" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 200px"></textarea>
+          <label  for="floatingTextarea2">Thêm Nhận Xét Tại Đây</label>
+        </div>
+        <div *ngIf="ratingID!=null" class="form-floating my-5">
+          <textarea class="form-control"readonly formControlName="contentRating" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 200px" ></textarea>
+        </div>
+        <div *ngIf="ratingID==null" class="text-end">
+          <button class="fm-btn-y" (click)="sendFeedBack()">Gửi Phản Hồi</button>
+        </div>
+    </form>
+  </div>
+</main>
+<app-footer></app-footer>

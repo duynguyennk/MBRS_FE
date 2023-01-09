@@ -1,0 +1,282 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~bootstrap/dist/css/bootstrap';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caramel&family=Dosis:wght@300&family=Lobster&family=Oswald:wght@300&family=Roboto:wght@100;300&display=swap');
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* fm button bg #ad8658 */
+.fm-btn-y {
+    background-color: #ad8658;
+    border: none;
+    color: white;
+    border-radius: 30px;
+    padding: 0.8rem 2rem;
+    font-weight: 600;
+}
+.fm-title{
+    line-height: 45px;
+    font-size: 1.8rem;
+    font-weight: 450;
+}
+.text-search{
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+.color-red{
+    color: red;
+}
+.fm-btn-bgbl{
+    background-color: #3268F1;
+    text-decoration: none;
+    color: white;
+    margin-left:1rem;
+}
+main{
+    position: relative;
+    top: 15%;
+}
+.remind{
+    font-weight: 500;
+    font-size: 1rem;
+    margin-bottom: 2rem !important;
+}
+.w-form-60{
+    width: 60%;
+    margin: auto;
+  }
+  .w-form-80{
+    width: 80%;
+    margin: auto;
+  }
+.title-input{
+    font-size: 1rem;
+    font-weight: 400;
+}
+.fm-border-60 {
+    background: #fafafa;
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    padding: 40px;
+  }
+/* animation */
+@-webkit-keyframes my {
+    0% { color: #ad8658 } 
+    50% { color: #fff;  } 
+    100% { color: #ad8658  } 
+}
+@-moz-keyframes my { 
+    0% { color: #ad8658 } 
+    50% { color: #fff;  } 
+    100% { color: #ad8658  } 
+}
+@-o-keyframes my { 
+    0% { color: #ad8658 } 
+    50% { color: #fff;  } 
+    100% { color: #ad8658  } 
+}
+@keyframes my { 
+    0% { color: #ad8658 } 
+    50% { color: #fff;  } 
+    100% { color: #ad8658  } 
+} 
+.fm-h1-animation {
+        font-size:3rem !important;
+        font-weight:bold;
+    -webkit-animation: my 2000ms infinite;
+    -moz-animation: my 2000ms infinite; 
+    -o-animation: my 2000ms infinite; 
+    animation: my 2000ms infinite;
+}
+/* animation button fm-btn-y */
+.fm-btn-y:hover, .fm-btn-y:focus {
+    animation: fm-btn-y 1s;
+    box-shadow: 0 0 0 2em transparent;
+  }
+button:hover, button:focus {
+    border-color: var(--hover);
+    /* color: #fff; */
+  }
+  button {
+  color: var(--color);
+  transition: 0.25s;
+}
+.fm-btn-y {
+    --color: white;
+    --hover: #ef8f6e;
+  }
+@keyframes fm-btn-y {
+    0% {
+      box-shadow: 0 0 0 0 var(--hover);
+    }
+  }
+
+/* stt */
+
+table{
+    counter-reset: row-num -1;
+}
+table tr{
+    counter-increment: row-num;
+}
+table tr td:first-child::before {
+    content: counter(row-num);
+}
+/* hvr-pulse */
+@-webkit-keyframes hvr-pulse {
+    25% {
+      -webkit-transform: scale(1.1);
+      transform: scale(1.1);
+    }
+  
+    75% {
+      -webkit-transform: scale(0.9);
+      transform: scale(0.9);
+    }
+  }
+  
+  @keyframes hvr-pulse {
+    25% {
+      -webkit-transform: scale(1.1);
+      transform: scale(1.1);
+    }
+  
+    75% {
+      -webkit-transform: scale(0.9);
+      transform: scale(0.9);
+    }
+  }
+
+  .hvr-pulse {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .hvr-pulse:hover, .hvr-pulse:focus, .hvr-pulse:active {
+    -webkit-animation-name: hvr-pulse;
+    animation-name: hvr-pulse;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-timing-function: linear;
+    animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+  }
+  /* hvr-grow */
+  /* Grow */
+.hvr-grow {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    -webkit-transition-property: transform;
+    transition-property: transform;
+  }
+  .hvr-grow:hover, .hvr-grow:focus, .hvr-grow:active {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  }
+  /*  */
+  @-webkit-keyframes hvr-wobble-to-top-right {
+    16.65% {
+      -webkit-transform: translate(8px, -8px);
+      transform: translate(8px, -8px);
+    }
+  
+    33.3% {
+      -webkit-transform: translate(-6px, 6px);
+      transform: translate(-6px, 6px);
+    }
+  
+    49.95% {
+      -webkit-transform: translate(4px, -4px);
+      transform: translate(4px, -4px);
+    }
+  
+    66.6% {
+      -webkit-transform: translate(-2px, 2px);
+      transform: translate(-2px, 2px);
+    }
+  
+    83.25% {
+      -webkit-transform: translate(1px, -1px);
+      transform: translate(1px, -1px);
+    }
+  
+    100% {
+      -webkit-transform: translate(0, 0);
+      transform: translate(0, 0);
+    }
+  }
+  
+  @keyframes hvr-wobble-to-top-right {
+    16.65% {
+      -webkit-transform: translate(8px, -8px);
+      transform: translate(8px, -8px);
+    }
+  
+    33.3% {
+      -webkit-transform: translate(-6px, 6px);
+      transform: translate(-6px, 6px);
+    }
+  
+    49.95% {
+      -webkit-transform: translate(4px, -4px);
+      transform: translate(4px, -4px);
+    }
+  
+    66.6% {
+      -webkit-transform: translate(-2px, 2px);
+      transform: translate(-2px, 2px);
+    }
+  
+    83.25% {
+      -webkit-transform: translate(1px, -1px);
+      transform: translate(1px, -1px);
+    }
+  
+    100% {
+      -webkit-transform: translate(0, 0);
+      transform: translate(0, 0);
+    }
+  }
+  
+  .hvr-wobble-to-top-right {
+    display: inline-block;
+    vertical-align: middle;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  .hvr-wobble-to-top-right:hover, .hvr-wobble-to-top-right:focus, .hvr-wobble-to-top-right:active {
+    -webkit-animation-name: hvr-wobble-to-top-right;
+    animation-name: hvr-wobble-to-top-right;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+  }
+
+  /* fm-icon-star */
+  .fm-icon-star{
+    color:orange;
+    font-size:1.3rem;
+  }

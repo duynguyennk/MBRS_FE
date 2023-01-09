@@ -1,0 +1,18 @@
+<main>
+  <div class="fm-header-dialog mb-3">
+    <p class="mb-0">{{ data.title }}</p>
+  </div>
+ 
+    <div class="fm-content-dialog text-content py-2">
+      <p class="mb-0"><i class="pi pi-question-circle size-icon"></i> {{ data.titleMessageContent }}</p>
+    </div>
+    <hr class="mb-0">
+   
+
+  <div class="fm-content-dialog fm-button text-end py-3">
+    <button mat-flat-button (click)="yes()" class="fm-btn-g me-4">
+      <p class="mb-0 size-text my-auto"><i class="pi pi-check my-auto size-icon"></i> Xác Nhận</p> 
+    </button>
+    <button mat-flat-button (click)="no()" class="fm-btn-g fm-x"><p class="mb-0 size-text my-auto"><i class="pi pi-times my-auto size-icon"></i> Huỷ</p></button>
+  </div>
+</main>

@@ -1,0 +1,21 @@
+<div class="notice">
+  <div class="notice-title">
+    <div class="icon-confirm">
+      <i class={{checkIcon}}></i>
+     </div>
+    <div class="btn-close-dialog">
+        <button type="button" class="close" aria-label="Close" (click)="dismiss()">
+            <span aria-hidden="true" class="color-white">&times;</span>
+        </button>
+    </div>
+  </div>
+ 
+  <div class="notice-content">
+    <h4 class="text-title mb-4">{{ title }}!</h4>
+    <p class="mb-0 text-content">{{ message }}.</p>
+    <!-- <button type="button" class="btn btn-danger" (click)="decline()">{{ btnCancelText }}</button> -->
+    <!-- <button type="button" class="fm-btn-y" (click)="accept()">
+      {{ btnOkText }}
+    </button> -->
+  </div>
+</div>

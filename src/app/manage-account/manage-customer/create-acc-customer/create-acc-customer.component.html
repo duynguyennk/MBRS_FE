@@ -1,0 +1,106 @@
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<main class="container">
+    <div class="w-form-60">
+        <p class="fm-title">
+            Tạo Tài Khoản Khách Hàng
+        </p>
+        <hr>
+        <p class="remind">Điền thông tin Khách Hàng Vào Phía Dưới</p>
+        <div class="fm-border-60">
+            <form [formGroup]="customerForm" (ngSubmit)='onSubmit()' class="">
+                <div class="form-group mb-4">
+                    <label for="fullName" class="input-title"><span class="color-red">*</span> Họ Và Tên </label>
+                    <input formControlName="fullName" [ngClass]="{'is-invalid':submitted&&customerForm.controls.fullName.errors}" minlength="2" maxlength="50" type="text" class="form-control" placeholder="VD: Đinh Văn Bình"/>
+                    <div *ngIf="submitted&&customerForm.controls.fullName.errors"class="text-danger">
+                        <div *ngIf="customerForm.controls.fullName.errors.required">
+                            {{isEmpty}}
+                        </div>
+                        <div *ngIf="customerForm.controls.fullName.errors.minlength">
+                            {{atLeast2C}}
+                        </div>
+                        <div *ngIf="customerForm.controls.fullName.errors.pattern">
+                            {{isLetter}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="userName" class="input-title"><span class="color-red">*</span> Tên Tài Khoản </label>
+                    <input formControlName="userName" [ngClass]="{'is-invalid':submitted&&customerForm.controls.userName.errors}"  minlength="2" maxlength="50" type="text" class="form-control" placeholder="VD: binhdv2911_hd"/>
+                    <div *ngIf="submitted&&customerForm.controls.userName.errors"class="text-danger">
+                        <div *ngIf="customerForm.controls.userName.errors.required">
+                            {{isEmpty}}
+                        </div>
+                        <div *ngIf="customerForm.controls.userName.errors.minlength">
+                            {{atLeast2C}}
+                        </div>
+                        <div *ngIf="customerForm.controls.userName.errors.pattern">
+                            {{atLeastNum_Let}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="email"class="input-title"><span class="color-red">*</span> Email </label>
+                    <input formControlName="email" [ngClass]="{'is-invalid':submitted&&customerForm.controls.email.errors}"minlength="4" maxlength="50" type="text" class="form-control" placeholder="VD: abcd@gmail.com"/>
+                    <div *ngIf="submitted&&customerForm.controls.email.errors"class="text-danger">
+                        <div *ngIf="customerForm.controls.email.errors.required">
+                            {{isEmpty}}
+                        </div>
+                        <div *ngIf="customerForm.controls.email.errors.minlength">
+                            {{atLeast4C}}
+                        </div>
+                        <div *ngIf="customerForm.controls.email.errors.email">
+                            {{isEmail}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="identifyNumber" class="input-title"><span class="color-red">*</span> Căn Cước Công Dân </label>
+                    <input formControlName="identifyNumber" [ngClass]="{'is-invalid':submitted&&customerForm.controls.identifyNumber.errors}" minlength="9" maxlength="15" type="text" class="form-control" placeholder="VD: 1234567899"/>
+                    <div *ngIf="submitted&&customerForm.controls.identifyNumber.errors"class="text-danger">
+                        <div *ngIf="customerForm.controls.identifyNumber.errors.required">
+                            {{isEmpty}}
+                        </div>
+                        <div *ngIf="customerForm.controls.identifyNumber.errors.minlength">
+                            {{atLeast12C}}
+                        </div>
+                        <div *ngIf="customerForm.controls.identifyNumber.errors.pattern">
+                            {{isNum}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="phoneNumber" class="input-title"><span class="color-red">*</span> Số Điện Thoại </label>
+                    <input formControlName="phoneNumber" [ngClass]="{'is-invalid':submitted&&customerForm.controls.phoneNumber.errors}" minlength="10" maxlength="11" class="form-control" placeholder="VD: 0813444555"/>
+                    <div *ngIf="submitted&&customerForm.controls.phoneNumber.errors" class="text-danger">
+                        <div *ngIf="customerForm.controls.phoneNumber.errors.required">
+                            {{isEmpty}}
+                        </div>
+                        <div *ngIf="customerForm.controls.phoneNumber.errors.minlength">
+                            {{atLeast10C}}
+                        </div>
+                        <div *ngIf="customerForm.controls.phoneNumber.errors.pattern">
+                            {{isNum}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-5">
+                    <label for="dateOfBirth" class="input-title"><span class="color-red">*</span> Ngày Sinh </label>
+                    <input formControlName="dateOfBirth" max="{{defaultCheckYears}}" [ngClass]="{'is-invalid':submitted&&customerForm.controls.dateOfBirth.errors}" type="date" class="form-control" />
+                    <div *ngIf="submitted&&customerForm.controls.dateOfBirth.errors" class="text-danger">
+                        <div *ngIf="customerForm.controls.dateOfBirth.errors.required">
+                            {{isEmpty}}
+                        </div>
+                    </div>
+                </div>
+                <div class="btn-dele-sub text-end">
+                    <button class="fw-bold btn px-4 py-2" (click)="cancelForm()">
+              <i class="pi pi-times"></i> Huỷ
+            </button>
+                    <button class="btn-create-customer fw-bold rounded-pill px-4 py-2" type="submit">
+              Tạo
+            </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>

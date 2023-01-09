@@ -1,0 +1,19 @@
+.btn-create-customer {
+  background-color: #ad8658;
+  border: none;
+  color: white;
+}
+
+.text-invalid {
+  color: rgba(72, 72, 72, 0.7);
+  font-size: 12px;
+}
+.fm-title {
+  line-height: 45px;
+}
+
+.color-red {
+  color: red;
+}
+
+

@@ -1,0 +1,111 @@
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<div class="container-fluid">
+  <div class="row login-form">
+    <div class="col-6 p-0 img-screen">
+      <img
+        src="/assets/images/managelogin/loginbg1.jpg"
+        alt=""
+        class="img-main"
+      />
+    </div>
+    <div class="col-6 p-0 img-lap">
+      <img
+        src="/assets/images/managelogin/loginbg.jpg"
+        alt=""
+        class="img-main"
+      />
+    </div>
+
+    <div class="col-6 my-auto text-center p-0">
+      <h1 class="fm-h1-animation mb-0">Chào mừng đến WestLake Hotel</h1>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="pos-form">
+        <p class="fs-3 text-login mb-4">Đăng nhập</p>
+        <div class="mb-3 mx-auto">
+          <input
+            formControlName="UserName"
+            [ngClass]="{
+              'is-invalid': submitted && loginForm.controls.UserName.errors
+            }"
+            minlength="2"
+            maxlength="50"
+            type="text"
+            class="form-control form-control-lg rounded-pill"
+            placeholder="Tên đăng nhập"
+          />
+          <div
+            *ngIf="submitted && loginForm.controls.UserName.errors"
+            class="text-danger"
+          >
+            <div *ngIf="loginForm.controls.UserName.errors.required">
+              {{ isEmpty }}
+            </div>
+          </div>
+        </div>
+        <div class="mb-3 mx-auto">
+          <div class="input-group">
+            <input
+              [type]="fieldTextType ? 'text' : 'password'"
+              formControlName="Password"
+              [ngClass]="{
+                'is-invalid': submitted && loginForm.controls.Password.errors
+              }"
+              minlength="8"
+              maxlength="100"
+              type="password"
+              class="form-control form-control-lg rounded-pill"
+              placeholder="Mật khẩu"
+            />
+          </div>
+          <div class="hide-show d-flex mt-2 justify-content-center my-auto">
+           <div class="my-auto">
+            <input type="checkbox"
+            [ngClass]="{
+              '': !fieldTextType,
+              '/': fieldTextType
+            }"
+            (click)="toggleFieldTextType()">
+           </div>
+          <p class="mb-0 ms-2">Ẩn/Hiện Mật Khẩu</p>
+          </div>
+          <div
+            *ngIf="submitted && loginForm.controls.Password.errors"
+            class="text-danger"
+          >
+            <div *ngIf="loginForm.controls.Password.errors.required">
+              {{ isEmpty }}
+            </div>
+          </div>
+        </div>
+
+        <!-- <button type="checkbox" (click)="password()">{{show ? 'Show' : 'Hide'}}</button> -->
+        <p class="text-danger">{{ stringError }}</p>
+        <div class="pos-captcha my-4">
+          <ngx-recaptcha2
+            #captchaElem
+            [siteKey]="siteKey"
+            formControlName="recaptcha"
+          >
+          </ngx-recaptcha2>
+        </div>
+
+        <div class="form-group my-4">
+          <button type="submit" class="btn btn-outline-dark">Đăng nhập</button>
+        </div>
+        <div class="form-group my-4">
+          <a routerLink="./forget-pass">Quên mật khẩu</a>
+          <p class="mb-0">hoặc</p>
+          <a routerLink="./change-pass">Đổi mật khẩu</a>
+        </div>
+        <div class="logo text-center">
+          <a routerLink="/homepage">
+            <img
+              src="/assets/images/homepage/LogoPro.png"
+              alt=""
+              class="img-logo"
+            />
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

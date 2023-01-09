@@ -1,0 +1,208 @@
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<main class="container">
+  <div class="w-form-60">
+    <div class="customer-text">
+      <p class="fm-title">Tạo Thông Tin Loại Xe Đạp</p>
+    </div>
+    <hr />
+    <p class="remind">Điền đầy đủ thông tin xe đạp bên dưới để tạo</p>
+    <form [formGroup]="typeBikeForm" (ngSubmit)="onSubmit()" class="my-5">
+      <!--  -->
+      <p class="fm-text fs-5">Ảnh Xe</p>
+      <div class="add-img-room mb-5">
+        <div class="btn-add text-end">
+          <!-- <button class="btn-add-room fw-bold rounded-pill px-4 py-2">
+            Thêm Ảnh
+          </button> -->
+          <div class="card">
+            <p-fileUpload #formImage
+            name="demo[]"
+            [customUpload]="true"
+            [fileLimit]="1"
+            (onSelect)="onSelect($event,formImage)"
+            (onClear)="onClear()"
+            [showUploadButton]="false"
+            accept="image/*"
+            chooseLabel="Thêm Ảnh"
+            cancelLabel = "Hủy Ảnh"
+            invalidFileLimitMessageSummary="Chỉ được thêm 1 ảnh"
+          >
+            <!-- <ng-template pTemplate="content">
+              <ul *ngIf="uploadedFiles.length">
+                <li *ngFor="let file of uploadedFiles">
+                  {{ file.name }} - {{ file.size }} bytes
+                </li>
+              </ul>
+            </ng-template> -->
+          </p-fileUpload>
+            <!-- <br>
+            <img [src]="imagePath" alt="" width="300"> -->
+          </div>
+        </div>
+      </div>
+      <!--  -->
+      <p class="fm-text fs-5">Thông Tin Loại Xe Đạp</p>
+      <div class="add-infor fm-border mb-5">
+        <div class="form-group mb-4">
+          <label for="typeBikeCode" class="title-input"
+            ><span class="color-red">*</span> Mã Loại Xe Đạp
+          </label>
+          <input
+            formControlName="typeBikeCode"
+            [ngClass]="{
+              'is-invalid':
+                submitted && typeBikeForm.controls.typeBikeCode.errors
+            }"
+            minlength="2"
+            maxlength="50"
+            type="text"
+            class="form-control"
+            placeholder="VD: TB01"
+          />
+          <div
+            *ngIf="submitted && typeBikeForm.controls.typeBikeCode.errors"
+            class="text-danger"
+          >
+            <div *ngIf="typeBikeForm.controls.typeBikeCode.errors.required">
+              {{ isEmpty }}
+            </div>
+            <div *ngIf="typeBikeForm.controls.typeBikeCode.errors.minlength">
+              {{ atLeast2C }}
+            </div>
+            <div *ngIf="typeBikeForm.controls.typeBikeCode.errors.pattern">
+              {{ atLeastNum_Let }}
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-4">
+          <label for="typeBikeName" class="title-input"
+            ><span class="color-red">*</span> Tên Loại Xe Đạp
+          </label>
+          <input
+            formControlName="typeBikeName"
+            [ngClass]="{
+              'is-invalid':
+                submitted && typeBikeForm.controls.typeBikeName.errors
+            }"
+            minlength="2"
+            maxlength="50"
+            type="text"
+            class="form-control"
+            placeholder="VD: Xe Vip"
+          />
+          <div
+            *ngIf="submitted && typeBikeForm.controls.typeBikeName.errors"
+            class="text-danger"
+          >
+            <div *ngIf="typeBikeForm.controls.typeBikeName.errors.required">
+              {{ isEmpty }}
+            </div>
+            <div *ngIf="typeBikeForm.controls.typeBikeName.errors.minlength">
+              {{ atLeast2C }}
+            </div>
+            <div *ngIf="typeBikeForm.controls.typeBikeName.errors.pattern">
+              {{ atLeastNum_Let }}
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-4">
+          <label for="numberOfSeat" class="title-input"
+            ><span class="color-red">*</span> Số Lượng Chỗ Ngồi</label
+          >
+          <input
+            formControlName="numberOfSeat"
+            [ngClass]="{
+              'is-invalid':
+                submitted && typeBikeForm.controls.numberOfSeat.errors
+            }"
+            minlength="1"
+            maxlength="15"
+            type="text"
+            class="form-control"
+            placeholder="VD: 2"
+          />
+          <div
+            *ngIf="submitted && typeBikeForm.controls.numberOfSeat.errors"
+            class="text-danger"
+          >
+            <div *ngIf="typeBikeForm.controls.numberOfSeat.errors.required">
+              {{ isEmpty }}
+            </div>
+            <div *ngIf="typeBikeForm.controls.numberOfSeat.errors.minlength">
+              {{ atLeast15C }}
+            </div>
+            <div *ngIf="typeBikeForm.controls.numberOfSeat.errors.pattern">
+              {{ isNum }}
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-4">
+          <label for="price" class="title-input"
+            ><span class="color-red">*</span> Giá</label
+          >
+          <input
+            formControlName="price"
+            [ngClass]="{
+              'is-invalid': submitted && typeBikeForm.controls.price.errors
+            }"
+            minlength="1"
+            maxlength="15"
+            type="text"
+            class="form-control"
+            placeholder="VD: 300000"
+          />
+          <div
+            *ngIf="submitted && typeBikeForm.controls.price.errors"
+            class="text-danger"
+          >
+            <div *ngIf="typeBikeForm.controls.price.errors.required">
+              {{ isEmpty }}
+            </div>
+            <div *ngIf="typeBikeForm.controls.price.errors.minlength">
+              {{ atLeast15C }}
+            </div>
+            <div *ngIf="typeBikeForm.controls.price.errors.pattern">
+              {{ isNum }}
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-4">
+          <label for="color" class="title-input"
+            ><span class="color-red">*</span> Màu
+          </label>
+          <select
+            formControlName="color"
+            [ngClass]="{
+              'is-invalid': submitted && typeBikeForm.controls.color.errors
+            }"
+            class="form-select"
+          >
+            <option value="Trắng">Trắng</option>
+            <option value="Đỏ">Đỏ</option>
+            <option value="Vàng">Vàng</option>
+            <option value="Xanh Lá Cây">Xanh Lá Cây</option>
+            <option value="Đen">Đen</option>
+            <option value="Xanh Biển">Xanh Biển</option>
+            <option value="Xám">Xám</option>
+            <option value="Nâu">Nâu</option>
+          </select>
+          <div
+            *ngIf="submitted && typeBikeForm.controls.color.errors"
+            class="text-danger"
+          >
+            <div *ngIf="typeBikeForm.controls.color.errors.required">
+              {{ isEmpty }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--  -->
+      <div class="fm-btn-cancel text-end my-5">
+        <button class="fw-bold btn px-4 py-2" (click)="cancelForm()">
+          <i class="pi pi-times"></i> Huỷ
+        </button>
+        <button class="fm-btn-y" type="submit">Tạo</button>
+      </div>
+    </form>
+  </div>
+</main>

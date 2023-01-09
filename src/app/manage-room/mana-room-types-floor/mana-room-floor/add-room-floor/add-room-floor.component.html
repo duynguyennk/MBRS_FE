@@ -1,0 +1,65 @@
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<main class="container">
+    <div class="w-form-60">
+        <div class="">
+            <p class="fm-title">
+                Tạo Thông Tin Tầng Khách Sạn
+            </p>
+        </div>
+        <hr>
+        <p class="remind">Điền đầy đủ thông tin tầng bên dưới để tạo</p>
+        <form [formGroup]="addRoomFloor" (ngSubmit)="onSubmit()" class="my-5">
+            <!--  -->
+            <div class="add-infor fm-border-60 mb-5">
+                <div class="form-group mb-4">
+                    <input formControlName="floorID" type="hidden" class="form-control" />
+                    <label for="floorCode" class="title-input"><span class="color-red">*</span> Mã Tầng </label>
+                    <input formControlName="floorCode" [ngClass]="{'is-invalid':submitted && addRoomFloor.controls.floorCode.errors}" minlength="2" maxlength="50" type="text" class="form-control" placeholder="VD: T1"/>
+                    <div *ngIf="submitted && addRoomFloor.controls.floorCode.errors" class="text-danger">
+                        <div *ngIf="addRoomFloor.controls.floorCode.errors.required">
+                            {{isEmpty}}
+                        </div>
+                        <div *ngIf="addRoomFloor.controls.floorCode.errors.minlength">
+                            {{atLeast2C}}
+                        </div>
+                        <div *ngIf="addRoomFloor.controls.floorCode.errors.pattern">
+                            {{atLeastNum_Let}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="numberFloor" class="title-input"><span class="color-red">*</span> Số Tầng </label>
+                    <input formControlName="numberFloor" [ngClass]="{'is-invalid':submitted && addRoomFloor.controls.numberFloor.errors}" type="number" minlength="1" maxlength="3" class="form-control" placeholder="VD: 1"/>
+                    <div *ngIf="submitted && addRoomFloor.controls.numberFloor.errors" class="text-danger">
+                        <div *ngIf="addRoomFloor.controls.numberFloor.errors.required">
+                            {{isEmpty}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="floorName" class="title-input"><span class="color-red">*</span> Tên Tầng </label>
+                    <input formControlName="floorName" [ngClass]="{'is-invalid':submitted && addRoomFloor.controls.floorName.errors}" minlength="2" maxlength="50"  type="text" class="form-control" placeholder="VD: Tầng 1"/>
+                    <div *ngIf="submitted && addRoomFloor.controls.floorName.errors" class="text-danger">
+                        <div *ngIf="addRoomFloor.controls.floorName.errors.required">
+                            {{isEmpty}}
+                        </div>
+                        <div *ngIf="addRoomFloor.controls.floorName.errors.minlength">
+                            {{atLeast2C}}
+                        </div>
+                        <div *ngIf="addRoomFloor.controls.floorName.errors.pattern">
+                            {{atLeastNum_Let}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="fm-btn-cancel text-end my-5">
+                <button class="fw-bold btn px-4 py-2" (click)="cancelForm()">
+                    <i class="pi pi-times"></i> Hủy
+                </button>
+                <button class="fm-btn-y" type="submit">
+                    Tạo
+                </button>
+            </div>
+        </form>
+    </div>
+</main>

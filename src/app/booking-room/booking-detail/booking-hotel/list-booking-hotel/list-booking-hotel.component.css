@@ -1,0 +1,93 @@
+.title {
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin: 1.5rem 0;
+}
+form {
+  width: 80%;
+  margin: auto;
+}
+.form-border {
+  border: 1px solid #000000;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 5rem;
+}
+.w-100{
+  width: 100%;
+}
+.fm-text {
+  font-weight: 500;
+  color: #484848;
+  font-size: 1.1rem;
+}
+.fm-text-u {
+  font-weight: 500;
+  color: #484848cc;
+  font-size: 1rem;
+}
+.fm-text-link {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #228a98;
+  text-decoration: none;
+}
+.p-contact-info {
+  padding: 2rem 10rem;
+}
+.contact{
+  width: 100%;
+}
+.price-detail{
+  width: 100%;
+}
+.required-text {
+  font-size: 0.8rem;
+  color: #484848b2;
+  font-weight: 500;
+}
+a{
+  text-decoration: none;
+}
+.fm-bg-border {
+  background-color: #003c7a;
+  border: 1px solid;
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 0.5rem 6rem;
+}
+.bg-grey-20 {
+  background-color: #fafafa;
+}
+.bg-remind {
+  background-color: #f1edd9;
+}
+.form-check-label {
+  vertical-align: middle;
+}
+.fm-text-checkbox {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-left: 1rem;
+}
+.bg-light-blue {
+  background-color: #a7eae2;
+}
+.pos-form > div > p {
+  font-size: 1rem;
+  line-height: 30px;
+}
+.pos-form > div:last-child > p {
+  font-size: 1rem;
+  line-height: 30px;
+  font-weight: 500;
+}
+.price {
+  font-weight: 700;
+}
+input{
+  margin: 1rem 0;
+}

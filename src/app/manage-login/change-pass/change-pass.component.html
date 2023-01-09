@@ -1,0 +1,217 @@
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<div class="container-fluid">
+  <div class="row login-form">
+    <div class="col-6 p-0 img-screen">
+      <img
+        src="/assets/images/managelogin/changepassbg1.jpg"
+        alt=""
+        class="img-main"
+      />
+    </div>
+    <div class="col-6 p-0 img-lap">
+      <img
+        src="/assets/images/managelogin/changepassbg.jpg"
+        alt=""
+        class="img-main"
+      />
+    </div>
+    <div class="col-6 my-auto text-center p-0">
+      <h1 class="fm-h1-animation mb-0">
+        Chào mừng đến WestLake Hotel
+      </h1>
+      <form
+        [formGroup]="changePasswordForm"
+        (ngSubmit)="onSubmit()"
+        class="format-form"
+      >
+        <p class="fs-3 fm-title text-login text-center">Đổi Mật Khẩu</p>
+        <div class="form-group mb-3 mx-auto">
+          <input
+            formControlName="userName"
+            type="text"
+            [ngClass]="{
+              'is-invalid':
+                submitted && changePasswordForm.controls.userName.errors
+            }"
+            minlength="2"
+            maxlength="50"
+            class="form-control form-control-lg rounded-pill"
+            placeholder="Tên Đăng Nhập"
+          />
+          <div
+            *ngIf="submitted && changePasswordForm.controls.userName.errors"
+            class="text-danger text-start"
+          >
+            <div *ngIf="changePasswordForm.controls.userName.errors.required">
+              {{ isEmpty }}
+            </div>
+            <div *ngIf="changePasswordForm.controls.userName.errors.minlength">
+              {{ atLeast2C }}
+            </div>
+            <div *ngIf="changePasswordForm.controls.userName.errors.pattern">
+              {{ notspace }}
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-3 mx-auto">
+          <input
+          [type]="fieldTextType ? 'text' : 'password'"
+            formControlName="oldPassword"
+            type="password"
+            [ngClass]="{
+              'is-invalid':
+                submitted && changePasswordForm.controls.oldPassword.errors
+            }"
+            minlength="8"
+            maxlength="100"
+            class="form-control form-control-lg rounded-pill"
+            placeholder="Mật khẩu cũ"
+          />
+          
+          <div
+            *ngIf="submitted && changePasswordForm.controls.oldPassword.errors"
+            class="text-danger text-start"
+          >
+            <div
+              *ngIf="changePasswordForm.controls.oldPassword.errors.required"
+            >
+              {{ isEmpty }}
+            </div>
+            <!-- <div *ngIf="changePasswordForm.controls.oldPassword.errors.password">
+                            {{isPassword}}
+                        </div> -->
+            <!-- <div *ngIf="changePasswordForm.controls.oldPassword.errors.minlength">
+                            {{atLeast8C}}
+                        </div> -->
+          </div>
+        </div>
+        <div class="form-group mb-3 mx-auto">
+          <input
+          [type]="fieldTextType ? 'text' : 'password'"
+            formControlName="newPassword"
+            type="password"
+            [ngClass]="{
+              'is-invalid':
+                submitted && changePasswordForm.controls.newPassword.errors
+            }"
+            minlength="8"
+            maxlength="100"
+            class="form-control form-control-lg rounded-pill"
+            placeholder="Mật khẩu mới"
+          />
+        
+          <div
+            *ngIf="submitted && changePasswordForm.controls.newPassword.errors"
+            class="text-danger text-start"
+          >
+            <div
+              *ngIf="changePasswordForm.controls.newPassword.errors.required"
+            >
+              {{ isEmpty }}
+            </div>
+            <div *ngIf="changePasswordForm.controls.newPassword.errors.pattern">
+              {{ isPassword }}
+            </div>
+            <div
+              *ngIf="changePasswordForm.controls.newPassword.errors.minlength"
+            >
+              {{ atLeast8C }}
+            </div>
+          </div>
+        </div>
+        <div class="form-group mx-auto">
+          <input
+          [type]="fieldTextType ? 'text' : 'password'"
+            formControlName="confirmPassword"
+            type="password"
+            [ngClass]="{
+              'is-invalid':
+                submitted && changePasswordForm.controls.confirmPassword.errors
+            }"
+            minlength="8"
+            maxlength="100"
+            class="form-control form-control-lg rounded-pill"
+            placeholder="Xác nhận mật khẩu mới"
+          />
+          
+          <div
+            *ngIf="
+              submitted && changePasswordForm.controls.confirmPassword.errors
+            "
+            class="text-danger text-start"
+          >
+            <div
+              *ngIf="
+                changePasswordForm.controls.confirmPassword.errors.required
+              "
+            >
+              {{ isEmpty }}
+            </div>
+            <div
+              *ngIf="changePasswordForm.controls.confirmPassword.errors.pattern"
+            >
+              {{ isPassword }}
+            </div>
+            <div
+              *ngIf="
+                changePasswordForm.controls.confirmPassword.errors.minlength
+              "
+            >
+              {{ atLeast8C }}
+            </div>
+            <div
+              *ngIf="
+                changePasswordForm.controls.confirmPassword.errors.matching
+              "
+            >
+              {{ matchPassword }}
+            </div>
+          </div>
+        </div>
+        
+        <p class="text-danger">{{ stringMessage }}</p>
+        <div class="hide-show d-flex mt-2 justify-content-center">
+          <div class="m-0">
+           <input type="checkbox"
+           [ngClass]="{
+             '': !fieldTextType,
+             '/': fieldTextType
+           }"
+           (click)="toggleFieldTextType()" class="my-0">
+          </div>
+         <p class="ms-2">Ẩn/Hiện Mật Khẩu</p>
+       </div>
+        <div class="pos-captcha my-4">
+          <ngx-recaptcha2
+            #captchaElem
+            [siteKey]="siteKey"
+            formControlName="recaptcha"
+          >
+          </ngx-recaptcha2>
+        </div>
+        <!-- <pre>{{stringMessage | json}}</pre> -->
+        <div class="form-group mb-3">
+          <button type="submit" class="btn btn-outline-dark">
+            Đổi Mật Khẩu
+          </button>
+        </div>
+        <div class="form-group mb-0">
+          <a routerLink="/manage-login/forget-pass">Quên mật khẩu</a>
+        </div>
+        <p class="my-1">hoặc</p>
+        <div class="form-group">
+          <a routerLink="/manage-login">Đăng nhập</a>
+        </div>
+        <div class="logo text-center">
+          <a href="./homepage">
+            <img
+              src="/assets/images/homepage/LogoPro.png"
+              alt=""
+              class="img-logo"
+            />
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

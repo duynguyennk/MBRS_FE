@@ -1,0 +1,123 @@
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<main class="container">
+  <div class="title-mana-room-detail">
+    <p class="fm-title">
+      Quản Lý Chi Tiết Phòng
+    </p>
+  </div>
+ <hr>
+  <!-- main -->
+  <!--  -->
+  <div class="mana-empl p-3">
+    <p class="text-search">Tìm Kiếm:</p>
+    <div class="d-flex justify-content-between my-4">
+      <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+        <div class="mana-empl-search row">
+          <div class="col-4 my-auto" >
+            <input formControlName="filterValue" type="text" placeholder="Tìm Kiếm" minlength="1" maxlength="150" class="form-control" />
+          </div>
+          
+          <div class="col-4 my-auto">
+            <select formControlName="filterName" [ngClass]="{'is-invalid':submitted && searchForm.controls.filterName.errors}" class="form-select" id="inputGroupSelect01">
+              
+              <option value="all">Tất Cả</option>
+              <option value="room_code">Mã Phòng</option>
+              <option value="room_name">Tên Phòng</option>
+              <option value="type_room_name">Loại Phòng</option>
+              <option value="price">Giá</option>
+              <option value="room_square">Diện Tích</option>
+            </select>       
+          </div>
+          <div class="col-4">
+            <button class="fm-btn-y" type="submit">Tìm Kiếm</button>
+          </div>
+        <!-- <p *ngIf="errString">abcd</p> -->
+        <div class="row">
+          <div class="col-4"></div>
+          <div class="col-4"><div *ngIf="submitted && searchForm.controls.filterName.errors" class="text-danger text-center">
+            <div *ngIf="searchForm.controls.filterName.errors.required">
+              {{isEmpty}}
+            </div>
+          </div>
+        </div>
+          <div class="col-4"></div>
+        </div>
+        </div>
+      </form>
+      <div class="mana-customer-createAcc">
+        <a routerLink="./add-room">
+          <button type="button" class="btn btn-outline-secondary">
+            <i class="pi pi-plus"></i> Tạo Phòng
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- table -->
+  <div class="p-3">
+    <div class="text-center">
+      <table class="table">
+        <thead>
+          <tr class="text-white">
+            <th class="my-auto">
+              <p class="mb-0">STT</p>
+            </th>
+            <th (click)="sort('roomCode')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Mã Phòng
+            </th>
+            <th (click)="sort('roomName')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Tên Phòng
+            </th>
+            <th (click)="sort('typeRoomName')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Loại Phòng
+            </th>
+            <th (click)="sort('price')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Giá
+            </th>
+            <th (click)="sort('roomSquare')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Diện Tích
+            </th>
+            <th scope="col">Thao Tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="
+              let r of roomInformation
+                | paginate
+                  : {
+                      itemsPerPage: tableSize,
+                      currentPage: page,
+                      totalItems: count
+                    }
+                | orderBy: orderHeader:isDescOrder
+            ">
+            <td></td>
+            <td class="text-uppercase">{{ r.roomCode }}</td>
+            <td class="text-uppercase">{{ r.roomName }}</td>
+            <td class="text-start">{{ r.typeRoomName }}</td>
+            <td>{{ r.price | number}}</td>
+            <td>{{ r.roomSquare }}</td>
+            <td>
+              <a [routerLink]="['./edit-room/', r.roomID]"><i class="pi pi-pencil me-2"></i></a>
+              <a routerLink="./" (click)="deleteRoom(r.roomID)"><i class="pi pi-trash"></i></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <div>
+      <select (change)="onTableSizeChange($event)">
+        <option *ngFor="let size of tableSizes">
+          {{ size }}
+        </option>
+      </select>
+    </div>
+    <div>
+      <pagination-controls previousLabel="Trước" nextLabel="Tiếp" class="pagination"
+        (pageChange)="onTableDataChange($event)">
+      </pagination-controls>
+    </div>
+  </div>
+</main>

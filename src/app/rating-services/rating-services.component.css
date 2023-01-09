@@ -1,0 +1,22 @@
+
+main{
+    position: relative;
+    top: 14%;
+}
+form{
+   
+    padding: 3rem;
+    line-height: 2rem;
+}
+.fm-border-tr{
+    border: 1px solid rgb(212, 212, 212);
+    box-shadow: 0px 12px 12px rgb(189, 189, 189);
+}
+.fm-text-rating{
+    font-size: 1.4rem;
+    font-weight: 450;
+}
+::ng-deep ngb-rating{
+    font-size: 1.4rem;
+    color: orange;
+}

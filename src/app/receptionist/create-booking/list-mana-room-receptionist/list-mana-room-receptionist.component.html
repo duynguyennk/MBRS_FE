@@ -1,0 +1,274 @@
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<main class="container-fluid">
+  <div class="employee-text">
+    <p class="fm-title">Quản Lý Đơn Đặt Phòng</p>
+  </div>
+  <hr />
+  <div class="mana-empl p-3">
+    <p class="fw-bold">Tìm Kiếm:</p>
+    <div class="d-flex justify-content-between my-4">
+      <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+        <div class="mana-empl-search row">
+          <div class="col-4">
+            <input
+              formControlName="filterValue"
+              minlength="1"
+              maxlength="150"
+              type="text"
+              placeholder="Tìm Kiếm"
+              class="form-control me-2"
+            />
+            <!-- [ngClass]="{'is-invalid':submitted && searchForm.controls.filterValue.errors}" -->
+            <!-- <div *ngIf="submitted && searchForm.controls.filterValue.errors">
+              <div *ngIf="searchForm.controls.filterValue.errors.pattern">
+                {{matchDateFormat}}
+              </div>
+            </div> -->
+          </div>
+          <div class="col-4">
+            <select
+              formControlName="filterName"
+              [ngClass]="{
+                'is-invalid': submitted && searchForm.controls.filterName.errors
+              }"
+              class="form-select"
+              id="inputGroupSelect01"
+            >             
+              <option value="all">Tất Cả</option>
+              <option value="order_code">Mã Hóa Đơn</option>
+              <option value="check_in">Check-In</option>
+              <option value="check_out">Check-Out</option>
+              <option value="price">Giá Trị</option>
+              <option value="full_name">Tên Khách</option>
+              <option value="identity_number">Số Căn Cước Công Dân</option>
+              <option value="phone_number">Số Điện Thoại</option>
+              <option value="content_result_payment">
+                Nội Dung Thanh Toán
+              </option>
+              <option value="bank_transaction_number">
+                Mã Giao Dịch Ngân hàng
+              </option>
+              <option value="bank_code">Mã Ngân Hàng</option>
+              <option value="type_payment">Loại Thanh Toán</option>
+              <option value="date_time">Thời Gian Thanh Toán</option>
+            </select>
+          </div>
+          <div class="col-4">
+            <button class="fm-btn-y" type="submit">Tìm Kiếm</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4"></div>
+          <div class="col-4">
+            <div
+              *ngIf="submitted && searchForm.controls.filterName.errors"
+              class="text-danger text-center"
+            >
+              <div *ngIf="searchForm.controls.filterName.errors.required">
+                {{ isEmpty }}
+              </div>
+            </div>
+          </div>
+          <div class="col-4"></div>
+        </div>
+      </form>
+      <div class="mana-empl-createAcc d-flex">
+        <a
+          (click)="
+            goToLink(
+              'https://sandbox.vnpayment.vn/merchantv2/Users/Login.htm?fbclid=IwAR2VJG7j-Q-UA6Qfwt3Boe4bTqYXpg9pKva15nHv-os6HsU7_eI_iylWB_A'
+            )
+          "
+          class="me-3"
+        >
+          <img
+            src="https://sandbox.vnpayment.vn/merchantv2/Styles/images/logo.png"
+            alt=""
+            class="img-logo"
+          />
+        </a>
+        <a routerLink="./create-recep-booking">
+          <button type="button" class="btn btn-outline-secondary">
+            <i class="pi pi-plus"></i> Tạo Đặt Phòng
+          </button>
+        </a>
+      </div>
+    </div>
+    <div class="table-account text-center">
+      <table class="table">
+        <thead>
+          <tr class="text-white text-center">
+            <th class="my-auto">
+              <p class="mb-0">STT</p>
+            </th>
+            <th (click)="sort('orderCode')" scope="col" class="my-auto">
+              <i class="pi pi-sort align-middle"></i> Mã HĐ
+            </th>
+            <th (click)="sort('fullName')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Tên Khách
+            </th>
+            <th (click)="sort('identityNumber')" scope="col">
+              <i class="pi pi-sort align-middle"></i> CCCD
+            </th>
+            <th (click)="sort('phoneNumber')" scope="col">
+              <i class="pi pi-sort align-middle"></i> SĐT
+            </th>
+            <th (click)="sort('checkIn')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Check-In
+            </th>
+            <th (click)="sort('checkOut')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Check-Out
+            </th>
+            <th (click)="sort('price')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Giá Trị
+            </th>
+            <th (click)="sort('contentPayment')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Nội Dung TT
+            </th>
+           
+          
+            <th (click)="sort('bankTransactionNumber')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Mã GDNH
+            </th>
+            <th (click)="sort('bankCode')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Kết Quả TT
+            </th>
+            <th (click)="sort('dateTime')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Thời Gian TT
+            </th>
+            <th scope="col">Thao Tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let e of orderRoomList
+                | paginate
+                  : {
+                      itemsPerPage: tableSize,
+                      currentPage: page,
+                      totalItems: count
+                    }
+                | orderBy : orderHeader : isDescOrder;
+              let i = index
+            "
+          >
+            <td></td>
+            <td class="text-start">{{ e.orderCode }}</td>
+            <td class="text-start wrap-text">{{ e.fullName }}</td>
+            <td>{{ e.identityNumber }}</td>
+            <td>{{ e.phoneNumber }}</td>
+            <td>{{ e.convertDateCheckIn }}</td>
+            <td>{{ e.convertDateCheckOut }}</td>
+            <td>{{ e.convertPrice }}</td>
+            <td class="text-start">{{ e.contentPayment }}</td>
+           
+            <td>{{ e.bankTransactionNumber }}</td>
+            <td
+              class="text-start"
+              style="color: blue"
+              *ngIf="
+                e.statusPayment == '00' &&
+                e.typeOrder === 2 &&
+                e.deleteFlag === 0
+              "
+            >
+              Đã thanh toán đặt cọc
+            </td>
+            <td
+              class="text-start"
+              style="color: green"
+              *ngIf="
+                e.statusPayment == '00' &&
+                e.typeOrder === 1 &&
+                e.deleteFlag === 0
+              "
+            >
+              Đã thanh toán đầy đủ
+            </td>
+            <td  class="text-start" style="color: green;" *ngIf="e.statusPayment == '00'  && e.typeOrder === 3 && e.deleteFlag === 0  "> Đã thanh toán tiền mặt</td>
+            <td
+              class="text-start"
+              style="color: red"
+              *ngIf="e.statusPayment == '00' && e.deleteFlag === 1"
+            >
+              Đã hủy bởi nhân viên
+            </td>
+            <td
+              class="text-start"
+              style="color: red"
+              *ngIf="e.statusPayment == '00' && e.deleteFlag === 2"
+            >
+              Đã hủy bởi khách hàng
+            </td>
+            <td
+              class="text-start"
+              style="color: green"
+              *ngIf="e.statusPayment == '00' && e.deleteFlag === 3"
+            >
+              Đã hoàn tiền
+            </td>
+            <td>{{e.convertDate}}</td>
+            <td>
+              <a
+                *ngIf="
+                  e.typeOrder == 2 &&
+                  e.deleteFlag != 1 &&
+                  e.deleteFlag != 2 &&
+                  e.deleteFlag != 3
+                "
+                routerLink="./"
+                class="me-1"
+                (click)="paymentCompleted(e.orderID,e.orderCode,e.fullName)"
+                ><i class="pi pi-money-bill"></i
+              ></a>
+              <a
+                *ngIf="
+                  e.deleteFlag != 1 && e.deleteFlag != 2 && e.deleteFlag != 3
+                "
+                routerLink="./"
+                class="me-1"
+                (click)="deleteOrderRoom(e.orderID,e.orderCode,e.fullName)"
+                ><i class="pi pi-times-circle"></i
+              ></a>
+              <a
+                *ngIf="e.deleteFlag == 2"
+                routerLink="./"
+                (click)="completedBackPayment(e.orderID,e.orderCode,e.fullName)"
+                ><i class="pi pi-refresh"></i
+              ></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <div>
+      <select (change)="onTableSizeChange($event)">
+        <option *ngFor="let size of tableSizes">
+          {{ size }}
+        </option>
+      </select>
+    </div>
+    <div>
+      <pagination-controls
+        previousLabel="Trước"
+        nextLabel="Tiếp"
+        (pageChange)="onTableDataChange($event)"
+      >
+      </pagination-controls>
+    </div>
+  </div>
+  <div class="expline">
+    <p class="fm-text">*Chú thích:</p>
+    <p>HĐ: Hóa Đơn</p>
+    <p>CCCD: Căn Cước Công Dân</p>
+    <p>GD: Giao Dịch</p>
+    <p>NH: Ngân Hàng</p>
+    <p>GDNH: Giao Dịch Ngân Hàng</p>
+    <p>SĐT: Số Điện Thoại</p>
+    <p>TT: Thanh Toán</p>
+  </div>
+</main>
+  

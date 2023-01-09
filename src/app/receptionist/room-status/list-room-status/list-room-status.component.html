@@ -1,0 +1,108 @@
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<main class="container">
+  <div class="w-form-80">
+    <div class="title-room-status">
+      <p class="fm-title">
+        Xem Trạng Thái Phòng
+      </p>
+    </div>
+    <div class="separator-line my-3">
+      <svg width="100" height="6" viewBox="0 0 140 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="140" height="6" rx="3" fill="#484848" />
+      </svg>
+    </div>
+    <!-- main function -->
+    <div class="main-function">
+      <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+        <div class="form-group d-flex justify-content-between">
+          <div class="my-auto">
+            <input formControlName="selectDate" type="date" class="form-control"
+              (ngModelChange)="onchangeSelect($event)"/>
+          </div>
+          <div class="my-auto">
+            <a href="{{webUrl}}/receptionist/room-status?date={{dateSelect}}" class="fm-btn-y">Tìm Kiếm</a>
+          </div>
+          <div class="my-auto">
+            <label for="">Thao Tác</label>
+          </div>
+          <div class="my-auto">
+            <select formControlName="orderID" class="form-select" aria-label="Default select example">
+              <option value="-1">Phòng</option>
+              <option *ngFor="let item of listRoomSelect" value="{{item.orderRoomDetailID}}">{{item.roomName}}</option>
+            </select>
+          </div>
+          <div class="my-auto">
+            <select formControlName="valueStatus" class="form-select" aria-label="Default select example">
+              <option value="-1">Trạng Thái</option>
+              <option value="2">Nhận Phòng</option>
+              <option value="3">Trả Phòng</option>
+            </select>
+          </div>
+          <div class="my-auto">
+            <button class="fm-btn-y" type="submit">Xác Nhận</button>
+          </div>
+        </div>
+      </form>
+      <!--  -->
+      <div *ngIf="arrayViewStatus.length!=0" class="display-quality my-3">
+        <div class="d-flex justify-content-between">
+          <div class="my-auto">
+            <p class="fm-text-quality">Tổng Số<span class="ms-2 bg-total">{{numberOfRoomStatus.numberTotalRoom}}</span>
+            </p>
+          </div>
+          <div class="my-auto">
+            <p class="fm-text-quality">Còn Trống<span
+                class="ms-2 bg-empty">{{numberOfRoomStatus.numberOfRoomEmpty}}</span></p>
+          </div>
+          <div class="my-auto">
+            <p class="fm-text-quality">Đặt Trước<span
+                class="ms-2 bg-reserve">{{numberOfRoomStatus.numberOfRoomHaveOrder}}</span></p>
+          </div>
+          <div class="my-auto">
+            <p class="fm-text-quality">Đang Ở<span
+                class="ms-2 bg-active">{{numberOfRoomStatus.numberOfRoomCheckIn}}</span></p>
+          </div>
+        </div>
+      </div>
+      <!-- table -->
+      <ng-container *ngIf="show">
+        <div class="text-center mb-3">
+          <p class="text-hour">Thời gian: từ {{checkIn | date:'yyyy/MM/dd'}}
+        </div>
+      </ng-container>
+      <ng-container *ngIf="_show">
+        <div class="text-center mb-3">
+          <p class="text-hour">Thời gian đặt: từ {{checkIn}} đến {{ holdTiket}}</p>
+        </div>
+      </ng-container>
+      <table>
+        <!-- tầng 1 -->
+        <tr *ngFor="let f of arrayViewStatus">
+          <td class="t1">{{f.floorName}}</td>
+          <div class="fm-table mx-0">
+            <div class="row mx-0">
+              <div *ngFor="let r of f.listRoom" class="col-3 px-0">
+                <td *ngIf="r.fullName !== null && r.statusRoom === 1" class="">
+                  <button *ngIf="r.fullName !== null" (click)="_toggle()"
+                    class="fm-btn-maps bg-reserve-t"><span >{{r.roomName}}</span><br>
+                    <span >{{r.fullName}}</span></button>
+                </td>
+                <td *ngIf="r.fullName !== null && r.statusRoom === 2" class="">
+                  <button *ngIf="r.fullName !== null" (click)="_toggle()" class="fm-btn-maps bg-active-t">{{r.roomName}} <br>
+                    {{r.fullName}}</button>
+                </td>
+                <td *ngIf="r.fullName === null && r.statusRoom === 0" class="">
+                 <a (click)="linkCreateBooking()">
+                  <button *ngIf="r.fullName === null" class="fm-btn-maps bg-empty-t" >{{r.roomName}} <br>
+                    Phòng Còn Trống</button>
+                 </a>
+                </td>
+              </div>
+            </div>
+          </div>
+        </tr>
+      </table>
+    </div>
+  </div>
+</main>
+  

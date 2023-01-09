@@ -1,0 +1,216 @@
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<main class="container-fluid">
+  <div class="employee-text">
+    <p class="fm-title">Quản Lý Xe Đạp</p>
+  </div>
+  <hr />
+  <div class="mana-empl p-3">
+    <p class="fw-bold">Tìm Kiếm:</p>
+    <div class="d-flex justify-content-between my-4">
+      <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+        <div class="mana-empl-search row">
+          <div class="col-4 my-auto">
+            <input
+              formControlName="filterValue"
+              type="text"
+              placeholder="Tìm Kiếm"
+              minlength="1"
+              maxlength="150"
+              class="form-control me-2"
+            />
+          </div>
+          <div class="col-4 my-auto">
+            <select
+              formControlName="filterName"
+              [ngClass]="{
+                'is-invalid': submitted && searchForm.controls.filterName.errors
+              }"
+              class="form-select"
+              id="inputGroupSelect01"
+            >
+              <option value="all">Tất Cả</option>
+              <option value="order_code">Mã Hóa Đơn</option>
+              <option value="date_time_get_bike">Thời Gian Lấy</option>
+              <option value="date_time_back_bike">Thời Gian Trả</option>
+              <option value="full_name">Tên Khách</option>
+              <option value="identify_number">Căn Cước Công Dân</option>
+              <option value="phone_number">Số Điện Thoại</option>
+              <option value="content_payment">Nội Dung Thanh Toán</option>
+              <option value="vnp_transaction_number">Mã VNPAY</option>
+              <option value="price">Giá Trị</option>
+              <option value="content_result_payment">Kết Quả Thanh Toán</option>
+              <option value="date_time">Thời Gian Thanh Toán</option>
+            </select>
+          </div>
+          <div class="col-4">
+            <button class="fm-btn-y" type="submit">Tìm Kiếm</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4"></div>
+          <div class="col-4">
+            <div
+              *ngIf="submitted && searchForm.controls.filterName.errors"
+              class="text-danger text-center"
+            >
+              <div *ngIf="searchForm.controls.filterName.errors.required">
+                {{ isEmpty }}
+              </div>
+            </div>
+          </div>
+          <div class="col-4"></div>
+        </div>
+      </form>
+      <div class="mana-empl-createAcc d-flex">
+        <a
+          (click)="
+            goToLink(
+              'https://sandbox.vnpayment.vn/merchantv2/Users/Login.htm?fbclid=IwAR2VJG7j-Q-UA6Qfwt3Boe4bTqYXpg9pKva15nHv-os6HsU7_eI_iylWB_A'
+            )
+          "
+          class="me-3"
+        >
+          <img
+            src="https://sandbox.vnpayment.vn/merchantv2/Styles/images/logo.png"
+            alt=""
+            class="img-logo"
+          />
+        </a>
+        <a routerLink="./order-bicycle-booking">
+          <button type="button" class="btn btn-outline-secondary">
+            <i class="pi pi-plus"></i> Tạo Đơn
+          </button>
+        </a>
+      </div>
+    </div>
+    <div class="table-account text-center">
+      <table class="table">
+        <thead>
+          <tr class="text-white text-center">
+            <th class="my-auto">
+              <p class="mb-0">STT</p>
+            </th>
+            <th (click)="sort('')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Mã HĐ
+            </th>
+            <th (click)="sort('')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Tên Khách
+            </th>
+
+            <th (click)="sort('')" scope="col">
+              <i class="pi pi-sort align-middle"></i> CCCD/CMND
+            </th>
+            <th (click)="sort('')" scope="col">
+              <i class="pi pi-sort align-middle"></i> SĐT
+            </th>
+            <th (click)="sort('')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Thời Gian Lấy
+            </th>
+            <th (click)="sort('')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Thời Gian Trả
+            </th>
+
+            <th (click)="sort('')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Nội Dung TT
+            </th>
+            <th (click)="sort('')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Mã VNPAY
+            </th>
+            <th (click)="sort('')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Giá Trị
+            </th>
+            <th (click)="sort('')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Thời Gian TT
+            </th>
+            <th (click)="sort('')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Kết Quả TT
+            </th>
+            <th (click)="sort('')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Trạng Thái
+            </th>
+            <th scope="col">Thao Tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let e of orderBikeList
+                | paginate
+                  : {
+                      itemsPerPage: tableSize,
+                      currentPage: page,
+                      totalItems: count
+                    }
+                | orderBy : orderHeader : isDescOrder;
+              let i = index
+            "
+          >
+            <td></td>
+            <td class="text-start">{{ e.orderCode }}</td>
+            <td class="text-start">{{ e.fullName }}</td>
+            <td>{{ e.identifyNumber }}</td>
+            <td>{{ e.phoneNumber }}</td>
+
+            <td>{{ e.convertDateTimeGetBike }}</td>
+            <td>{{ e.convertDateTimeBackBike }}</td>
+
+            <td class="text-start">{{ e.contentPayment }}</td>
+            <td>{{ e.vnpTransactionNumber }}</td>
+            <td>{{ e.price | number }}</td>
+            <td>{{ e.convertDate }}</td>
+            <td style="color: red" *ngIf="e.statusPayment !== '00'">
+              {{ e.contentResultPayment }}
+            </td>
+            <td style="color: green" *ngIf="e.statusPayment == '00'">
+              Đã thanh toán
+            </td>
+            <td style="color: red" *ngIf="e.statusBike == 0">Chưa nhận xe</td>
+            <td style="color: green" *ngIf="e.statusBike == 1">Đã nhận xe</td>
+            <td style="color: blue" *ngIf="e.statusBike == 2">Đã trả xe</td>
+            <td>
+              <a *ngIf="e.statusBike == 0"
+                ><i
+                  (click)="changeStatus(1, e.orderID,e.orderCode,e.fullName)"
+                  class="pi pi-check-square"
+                ></i
+              ></a>
+              <a *ngIf="e.statusBike == 1"
+                ><i
+                  (click)="changeStatus(2, e.orderID,e.orderCode,e.fullName)"
+                  class="pi pi-refresh"
+                ></i
+              ></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <div>
+      <select (change)="onTableSizeChange($event)">
+        <option *ngFor="let size of tableSizes">
+          {{ size }}
+        </option>
+      </select>
+    </div>
+    <div>
+      <pagination-controls
+        previousLabel="Trước"
+        nextLabel="Tiếp"
+        (pageChange)="onTableDataChange($event)"
+      >
+      </pagination-controls>
+    </div>
+  </div>
+  <div class="expline">
+    <p class="fm-text">*Chú thích:</p>
+    <p>HĐ: Hóa Đơn</p>
+    <p>CCCD: Căn Cước Công Dân</p>
+    <p>GD: Giao Dịch</p>
+    <p>CMND: Chứng Minh Nhân Dân</p>
+    <p>GDNH: Giao Dịch Ngân Hàng</p>
+    <p>SĐT: Số Điện Thoại</p>
+    <p>TT: Thanh Toán</p>
+  </div>
+</main>

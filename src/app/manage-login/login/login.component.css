@@ -1,0 +1,44 @@
+h1 {
+    font-family: Montaga;
+    font-weight: 400;
+}
+
+.text-login {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+}
+
+a {
+    color: black;
+}
+form{
+    width: 50%;
+    margin: auto;
+}
+.img-main {
+    max-width: 100%;
+    width: 100%;
+    height: -webkit-fill-available;
+}
+.fm-h1-animation{
+    padding-bottom: 12rem;
+}
+.pos-captcha{
+    text-align: -webkit-center;
+    margin: 1rem 0;
+}
+.img-logo{
+    width: 20%;
+    height: auto;
+}
+.img-lap{
+    display: none;
+}
+@media only screen and (min-width: 992px) and (max-width: 1600px) {
+    .img-screen{
+        display: none;
+    }
+    .img-lap{
+        display: inherit;
+    }
+}

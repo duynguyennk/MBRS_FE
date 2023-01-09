@@ -1,0 +1,266 @@
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<main>
+  <div class="bicycle-service">
+    <img
+      src="/assets/images/booking-service/datxe1.png"
+      alt=""
+      class="img-main"
+    />
+    <p class="title text-white">ĐẶT XE ĐẠP</p>
+    <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+      <div class="container">
+        <div class="w-form">
+          <div class="row form-group">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-4 my-auto">
+                  <label for="dateRent" class="text-lb-search"
+                    ><span class="color-red">*</span>Ngày Thuê</label
+                  >
+                </div>
+                <div class="col-8">
+                  <input
+                    formControlName="dateRent"
+                    type="date" 
+                    class="form-control"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && searchForm.controls.dateRent.errors
+                    }"
+                  />
+                  <div *ngIf="submitted && searchForm.controls.dateRent.errors">
+                    <div *ngIf="searchForm.controls.dateRent.errors.required">
+                      {{ isEmpty }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-4"></div>
+                <div class="col-8">
+                  <p
+                    *ngIf="searchForm.invalid"
+                    class="text-white"
+                  >
+                    Ngày thuê lớn hơn ngày hôm Nay
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col-4 my-auto">
+                  <label for="numberOfBike" class="text-lb-search"
+                    ><span class="color-red">*</span>Số Lượng Xe</label
+                  >
+                </div>
+                <div class="col-8">
+                  <select
+                    formControlName="numberOfBike"
+                    class="form-select"
+                    aria-label="Default select example"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && searchForm.controls.numberOfBike.errors
+                    }"
+                  >
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                  </select>
+                  <div
+                    *ngIf="submitted && searchForm.controls.numberOfBike.errors"
+                  >
+                    <div
+                      *ngIf="searchForm.controls.numberOfBike.errors.required"
+                    >
+                      {{ isEmpty }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-6">
+              <div class="row">
+                <div class="col-4 my-auto">
+                  <label for="hoursGetBike" class="text-lb-search">
+                    <span class="color-red">*</span>Giờ Nhận Xe</label
+                  >
+                </div>
+                <div class="col-8">
+                  <select
+                    formControlName="hoursGetBike"
+                    class="form-select"
+                    aria-label="Default select example"
+                    (ngModelChange)="onchangeSelect($event)"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && searchForm.controls.hoursGetBike.errors
+                    }"
+                  >
+                    <option value="07:00:00">07:00:00</option>
+                    <option value="08:00:00">08:00:00</option>
+                    <option value="09:00:00">09:00:00</option>
+                    <option value="10:00:00">10:00:00</option>
+                    <option value="11:00:00">11:00:00</option>
+                    <option value="12:00:00">12:00:00</option>
+                    <option value="13:00:00">13:00:00</option>
+                    <option value="14:00:00">14:00:00</option>
+                    <option value="15:00:00">15:00:00</option>
+                    <option value="16:00:00">16:00:00</option>
+                    <option value="17:00:00">17:00:00</option>
+                    <option value="18:00:00">18:00:00</option>
+                    <option value="19:00:00">19:00:00</option>
+                    <option value="20:00:00">20:00:00</option>
+                    <option value="21:00:00">21:00:00</option>
+                  </select>
+                  <div
+                    *ngIf="submitted && searchForm.controls.hoursGetBike.errors"
+                  >
+                    <div
+                      *ngIf="searchForm.controls.hoursGetBike.errors.required"
+                    >
+                      {{ isEmpty }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="row">
+                <div class="col-4 my-auto">
+                  <label for="timeHire" class="text-lb-search"
+                    ><span class="color-red">*</span>Số giờ Thuê</label
+                  >
+                </div>
+                <div class="col-8 d-flex justify-content-between">
+                  <select
+                    formControlName="timeHire"
+                    class="form-select"
+                    aria-label="Default select example"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && searchForm.controls.timeHire.errors
+                    }"
+                  >
+                    <option *ngFor="let h of hoursRent" value="{{ h.value }}">
+                      {{ h.value }}
+                    </option>
+                  </select>
+                  <div *ngIf="submitted && searchForm.controls.timeHire.errors">
+                    <div *ngIf="searchForm.controls.timeHire.errors.required">
+                      {{ isEmpty }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row form-group">
+            <div class="col-6"></div>
+            <div class="col-6 text-end">
+              <button class="fm-btn-y" (click)="loadSnipper()">Tìm Kiếm</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="container">
+    <div class="my-5 row w-form">
+      <div class="col-3 selective">
+        <div class="my-3">
+          <div class="my-auto">
+            <p class="text-title">Chọn Lọc Theo</p>
+          </div>
+          <hr />
+          <p class="text-content">Giá Xe</p>
+          <div *ngFor="let item of checkBoxArray" class="mb-2">
+            <input
+              type="{{ item.type }}"
+              value="{{ item.id }}"
+              (click)="onChange($event)"
+              class="me-2"
+            />
+            <label for="">{{ item.rangePrice }}</label>
+          </div>
+        </div>
+      </div>
+      <div class="col-1 px-0"></div>
+      <!-- vehicle -->
+      <div class="row col-8">
+        <div
+          *ngFor="
+            let b of bikeList
+              | paginate
+                : {
+                    itemsPerPage: tableSize,
+                    currentPage: page,
+                    totalItems: count
+                  }
+          "
+          class="col-6 mb-5 hvr-grow"
+        >
+          <a
+            href="{{webUrl}}/booking-service/rent-bicycle/bicycle-payment?typeBikeID={{
+              b.typeBikeID
+            }}&dateRent={{ informationSearch.dateRent }}&hoursGetBike={{
+              informationSearch.hoursGetBike
+            }}&timeHire={{ informationSearch.timeHire }}&numberOfBike={{
+              informationSearch.numberOfBike
+            }}&price={{ b.price }}&typeBikeName={{ b.typeBikeName }}"
+          >
+            <img
+              src="{{b.imageBase64}}"
+              alt=""
+              class="img-box text-decoration-none"
+            />
+          </a>
+
+          <div class="d-flex justify-content-between">
+            <p class="fm-text mb-0">Tổng số xe: {{ b.totalBike }}</p>
+            <p class="fm-text mb-0">{{ b.price | number }} VNĐ/giờ</p>
+          </div>
+          <div class="d-flex justify-content-between">
+            <p class="fm-text">{{ b.typeBikeName }}</p>
+
+           <div class="my-auto">
+            <ngb-rating
+            [(rate)]="currentRate"
+            [readonly]="true"
+            [max]="5"
+            class="fm-icon-star"
+          ></ngb-rating>
+           </div>
+          </div>
+        </div>
+
+        <!-- pagination -->
+        <div class="d-flex justify-content-center">
+          <!-- <div class="">
+              <select (change)="onTableSizeChange($event)">
+                <option *ngFor="let size of tableSizes">
+                  {{ size }}
+                </option>
+              </select>
+            </div> -->
+          <div>
+            <pagination-controls
+              previousLabel="Trước"
+              nextLabel="Tiếp"
+              (pageChange)="onTableDataChange($event)"
+            >
+            </pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

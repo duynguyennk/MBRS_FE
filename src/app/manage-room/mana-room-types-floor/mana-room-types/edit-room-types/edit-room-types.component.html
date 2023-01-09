@@ -1,0 +1,317 @@
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<main class="container">
+    <div class="w-form-60">
+        <div class="customer-text">
+            <p class="fm-title">
+                Chỉnh Sửa Thông Tin Loại Phòng Khách Sạn
+            </p>
+        </div>
+        <hr>
+        <p class="remind">Chỉnh sửa thông tin phòng bên dưới</p>
+        <form [formGroup]="addRoomTypes" (ngSubmit)="onSubmit()" class="my-5">
+            <!-- edit ảnh phòng -->
+            <p class="fm-text">Ảnh Phòng</p>
+            <div class="d-flex justify-content-between border">
+                <div *ngIf="firstImage != null" class="pos-img-box">
+                    <a (click)="onDeleteImageTypeRoom(1)" class="close AClass">
+                        <span class="fm-close">&times;</span>
+                    </a>
+                    <img src="{{firstImage}}" alt="" class="img-box" />
+                </div>
+                <div *ngIf="firstImage == null">
+                    <p-fileUpload #formImage1 mode="basic" name="demo[]" accept="image/*" (onSelect)="uploadAImage($event,formImage1,1)" chooseLabel="Ảnh 1"></p-fileUpload>
+                </div>
+                <div *ngIf="secondImage != null" class="pos-img-box">
+                    <a (click)="onDeleteImageTypeRoom(2)" class="close AClass">
+                        <span class="fm-close">&times;</span>
+                    </a>
+                    <img src="{{secondImage}}" alt="" class="img-box" />
+                </div>
+                <div *ngIf="secondImage == null">
+                    <p-fileUpload #formImage2 mode="basic" name="demo[]" accept="image/*" (onSelect)="uploadAImage($event,formImage2,2)" chooseLabel="Ảnh 2"></p-fileUpload>
+                </div>
+                <div *ngIf="thirdImage != null" class="pos-img-box">
+                    <a (click)="onDeleteImageTypeRoom(3)" class="close AClass">
+                        <span class="fm-close">&times;</span>
+                    </a>
+                    <img src="{{thirdImage}}" alt="" class="img-box" />
+                </div>
+                <div *ngIf="thirdImage == null">
+                    <p-fileUpload #formImage3 mode="basic" name="demo[]" accept="image/*" (onSelect)="uploadAImage($event,formImage3,3)" chooseLabel="Ảnh 3"></p-fileUpload>
+                </div>
+                <div *ngIf="fourImage != null" class="pos-img-box">
+                    <a (click)="onDeleteImageTypeRoom(4)" class="close AClass">
+                        <span class="fm-close">&times;</span>
+                    </a>
+                    <img src="{{fourImage}}" alt="" class="img-box" />
+                </div>
+                <div *ngIf="fourImage == null">
+                    <p-fileUpload #formImage4 mode="basic" name="demo[]" accept="image/*" (onSelect)="uploadAImage($event,formImage4,4)" chooseLabel="Ảnh 4"></p-fileUpload>
+                </div>
+                <div *ngIf="fifthImage != null" class="pos-img-box">
+                    <a (click)="onDeleteImageTypeRoom(5)" class="close AClass">
+                        <span class="fm-close">&times;</span>
+                    </a>
+                    <img src="{{fifthImage}}" alt="" class="img-box" />
+                </div>
+                <div *ngIf="fifthImage == null">
+                    <p-fileUpload #formImage5 mode="basic" name="demo[]" accept="image/*" (onSelect)="uploadAImage($event,formImage5,5)" chooseLabel="Ảnh 5"></p-fileUpload>
+                </div>
+            </div>
+            <div class="add-img-room mb-5">
+                <div class="btn-add text-end">
+                </div>
+            </div>
+            <!-- edit infor in form -->
+            <p class="fm-text">Thông Tin Loại Phòng</p>
+            <div class="add-infor fm-border mb-5">
+                <div class="form-group mb-4">
+                    <label for="typeRoomCode" class="title-input"><span class="color-red">*</span> Mã Loại Phòng
+                    </label>
+                    <input formControlName="typeRoomCode"
+                        [ngClass]="{'is-invalid':submitted && addRoomTypes.controls.typeRoomCode.errors}" minlength="2"
+                        maxlength="50" type="text" class="form-control" />
+                    <div *ngIf="submitted && addRoomTypes.controls.typeRoomCode.errors" class="text-danger">
+                        <div *ngIf="addRoomTypes.controls.typeRoomCode.errors.required">
+                            {{isEmpty}}
+                        </div>
+                        <div *ngIf="addRoomTypes.controls.typeRoomCode.errors.minlength">
+                            {{atLeast2C}}
+                        </div>
+                        <div *ngIf="addRoomTypes.controls.typeRoomCode.errors.letter_number">
+                            {{atLeastNum_Let}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="typeRoomName" class="title-input"><span class="color-red">*</span> Tên Loại Phòng
+                    </label>
+                    <input formControlName="typeRoomName"
+                        [ngClass]="{'is-invalid':submitted && addRoomTypes.controls.typeRoomName.errors}" minlength="2"
+                        maxlength="50" type="text" class="form-control" />
+                    <div *ngIf="submitted && addRoomTypes.controls.typeRoomName.errors" class="text-danger">
+                        <div *ngIf="addRoomTypes.controls.typeRoomName.errors.required">
+                            {{isEmpty}}
+                        </div>
+                        <div *ngIf="addRoomTypes.controls.typeRoomName.errors.minlength">
+                            {{atLeast2C}}
+                        </div>
+                        <div *ngIf="addRoomTypes.controls.typeRoomName.errors.letter_number">
+                            {{atLeastNum_Let}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="numberOfChild" class="title-input"><span class="color-red">*</span> Số Lượng Trẻ Con
+                    </label>
+                    <input formControlName="numberOfChild"
+                        [ngClass]="{'is-invalid':submitted && addRoomTypes.controls.numberOfChild.errors}" minlength="1"
+                        maxlength="10" type="number" class="form-control" />
+                    <div *ngIf="submitted && addRoomTypes.controls.numberOfChild.errors" class="text-danger">
+                        <div *ngIf="addRoomTypes.controls.numberOfChild.errors.required">
+                            {{isEmpty}}
+                        </div>
+                        <div *ngIf="addRoomTypes.controls.numberOfChild.errors.minlength">
+                            {{atLeast2to10C}}
+                        </div>
+                        <div *ngIf="addRoomTypes.controls.numberOfChild.errors.number">
+                            {{isNum}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="numberOfBed" class="title-input"><span class="color-red">*</span> Số Lượng Giường
+                    </label>
+                    <input formControlName="numberOfBed"
+                        [ngClass]="{'is-invalid':submitted && addRoomTypes.controls.numberOfBed.errors}" minlength="1"
+                        maxlength="10" type="number" type="number" class="form-control" />
+                    <div *ngIf="submitted && addRoomTypes.controls.numberOfBed.errors" class="text-danger">
+                        <div *ngIf="addRoomTypes.controls.numberOfBed.errors.required">
+                            {{isEmpty}}
+                        </div>
+                        <div *ngIf="addRoomTypes.controls.numberOfBed.errors.minlength">
+                            {{atLeast2to10C}}
+                        </div>
+                        <div *ngIf="addRoomTypes.controls.numberOfBed.errors.number">
+                            {{isNum}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="numberOfAdult" class="title-input"><span class="color-red">*</span> Số Lượng Người Lớn
+                    </label>
+                    <input formControlName="numberOfAdult"
+                        [ngClass]="{'is-invalid':submitted && addRoomTypes.controls.numberOfAdult.errors}" minlength="1"
+                        maxlength="10" type="number" class="form-control" />
+                    <div *ngIf="submitted && addRoomTypes.controls.numberOfAdult.errors" class="text-danger">
+                        <div *ngIf="addRoomTypes.controls.numberOfAdult.errors.required">
+                            {{isEmpty}}
+                        </div>
+                        <div *ngIf="addRoomTypes.controls.numberOfAdult.errors.minlength">
+                            {{atLeast2to10C}}
+                        </div>
+                        <div *ngIf="addRoomTypes.controls.numberOfAdult.errors.number">
+                            {{isNum}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="numberOfView" class="title-input"><span class="color-red">*</span> Số Lượng Ban Công
+                    </label>
+                    <input formControlName="numberOfView"
+                        [ngClass]="{'is-invalid':submitted && addRoomTypes.controls.numberOfView.errors}" minlength="1"
+                        maxlength="10" type="number" class="form-control" />
+                    <div *ngIf="submitted && addRoomTypes.controls.numberOfView.errors" class="text-danger">
+                        <div *ngIf="addRoomTypes.controls.numberOfView.errors.required">
+                            {{isEmpty}}
+                        </div>
+                        <div *ngIf="addRoomTypes.controls.numberOfView.errors.minlength">
+                            {{atLeast2to10C}}
+                        </div>
+                        <div *ngIf="addRoomTypes.controls.numberOfView.errors.number">
+                            {{isNum}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="numberOfAddingBed" class="title-input"><span class="color-red">*</span> Số Lượng Giường
+                        Có Thể Thêm </label>
+                    <input formControlName="numberOfAddingBed"
+                        [ngClass]="{'is-invalid':submitted && addRoomTypes.controls.numberOfAddingBed.errors}"
+                        minlength="1" maxlength="10" type="number" class="form-control" />
+                    <div *ngIf="submitted && addRoomTypes.controls.numberOfAddingBed.errors" class="text-danger">
+                        <div *ngIf="addRoomTypes.controls.numberOfAddingBed.errors.required">
+                            {{isEmpty}}
+                        </div>
+                        <div *ngIf="addRoomTypes.controls.numberOfAddingBed.errors.minlength">
+                            {{atLeast2to10C}}
+                        </div>
+                        <div *ngIf="addRoomTypes.controls.numberOfAddingBed.errors.number">
+                            {{isNum}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="numberOfBathRoom" class="title-input"><span class="color-red">*</span> Số Lượng Phòng
+                        Tắm </label>
+                    <input formControlName="numberOfBathRoom"
+                        [ngClass]="{'is-invalid':submitted && addRoomTypes.controls.numberOfBathRoom.errors}"
+                        minlength="1" maxlength="10" type="number" class="form-control" />
+                    <div *ngIf="submitted && addRoomTypes.controls.numberOfBathRoom.errors" class="text-danger">
+                        <div *ngIf="addRoomTypes.controls.numberOfBathRoom.errors.required">
+                            {{isEmpty}}
+                        </div>
+                        <div *ngIf="addRoomTypes.controls.numberOfBathRoom.errors.minlength">
+                            {{atLeast2to10C}}
+                        </div>
+                        <div *ngIf="addRoomTypes.controls.numberOfBathRoom.errors.number">
+                            {{isNum}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="price" class="title-input"><span class="color-red">*</span> Giá </label>
+                    <input formControlName="price"
+                        [ngClass]="{'is-invalid':submitted && addRoomTypes.controls.price.errors}" minlength="2"
+                        maxlength="15" type="text" class="form-control" />
+                    <div *ngIf="submitted && addRoomTypes.controls.price.errors" class="text-danger">
+                        <div *ngIf="addRoomTypes.controls.price.errors.required">
+                            {{isEmpty}}
+                        </div>
+                        <div *ngIf="addRoomTypes.controls.price.errors.minlength">
+                            {{atLeast2to10C}}
+                        </div>
+                        <div *ngIf="addRoomTypes.controls.price.errors.pattern">
+                            {{isNum}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="roomSquare" class="title-input"><span class="color-red">*</span> Diện Tích </label>
+                    <input formControlName="roomSquare"
+                        [ngClass]="{'is-invalid':submitted && addRoomTypes.controls.roomSquare.errors}" minlength="2"
+                        maxlength="15" type="text" class="form-control" />
+                    <div *ngIf="submitted && addRoomTypes.controls.roomSquare.errors" class="text-danger">
+                        <div *ngIf="addRoomTypes.controls.roomSquare.errors.required">
+                            {{isEmpty}}
+                        </div>
+                        <div *ngIf="addRoomTypes.controls.roomSquare.errors.minlength">
+                            {{atLeast2to10C}}
+                        </div>
+                        <div *ngIf="addRoomTypes.controls.roomSquare.errors.pattern">
+                            {{isNum}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mb-4">
+                    <label for="contentIntroduceRoom" class="title-input"> Nội Dung Giới Thiệu </label>
+                    <textarea formControlName="contentIntroduceRoom" type="text" class="form-control"
+                        aria-label="With textarea" style="height: 200px"></textarea>
+                </div>
+            </div>
+            <!-- Convenient -->
+            <p class="fm-text"><span class="color-red">*</span> Tiện Nghi</p>
+            <div class="fm-border row mx-auto">
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <input formControlName="safetyBox" type="checkbox" class="me-2" />
+                        <label for="safetyBox"> Cắt Sét</label>
+                    </div>
+                    <div class="form-group mb-4">
+                        <input formControlName="dryer" type="checkbox" class="me-2" />
+                        <label for="dryer"> Máy Sấy</label>
+                    </div>
+                    <div class="form-group mb-4">
+                        <input formControlName="wifi" type="checkbox" class="me-2" />
+                        <label for="wifi"> Wifi</label>
+                    </div>
+                    <div class="form-group">
+                        <input formControlName="iron" type="checkbox" class="me-2" />
+                        <label for="iron"> Bàn Là</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <input formControlName="tivi" type="checkbox" class="me-2" />
+                        <label for="tivi"> Tivi</label>
+                    </div>
+                    <div class="form-group mb-4">
+                        <input formControlName="fridge" type="checkbox" class="me-2" />
+                        <label for="fridge"> Tủ Lạnh</label>
+                    </div>
+                    <div class="form-group mb-4">
+                        <input formControlName="heaterBath" type="checkbox" class="me-2" />
+                        <label for="heaterBath"> Máy Nóng Lạnh</label>
+                    </div>
+                    <div class="form-group">
+                        <input formControlName="bathTub" type="checkbox" class="me-2" />
+                        <label for="bathTub"> Bồn Tắm Nằm</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group mb-4">
+                        <input formControlName="airCondition" type="checkbox" class="me-2" />
+                        <label for="airCondition"> Điều Hòa</label>
+                    </div>
+                    <div class="form-group mb-4">
+                        <input formControlName="heaterRoom" type="checkbox" class="me-2" />
+                        <label for="heaterRoom"> Lò Sưởi</label>
+                    </div>
+                    <div class="form-group">
+                        <input formControlName="dinnerTable" type="checkbox" class="me-2" />
+                        <label for="dinnerTable"> Bàn Ăn</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="fm-btn-cancel text-end my-5">
+                <button class="fw-bold btn px-4 py-2" (click)="cancelForm()">
+                    <i class="pi pi-times"></i> Hủy
+                </button>
+                <button class="fm-btn-y" type="submit">
+                    Lưu
+                </button>
+            </div>
+        </form>
+    </div>
+</main>

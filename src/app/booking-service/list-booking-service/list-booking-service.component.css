@@ -1,0 +1,125 @@
+.bg-main {
+    position: relative;
+}
+main{
+    position: relative;
+    top: 4%;
+}
+.img-intro {
+    width: 100%;
+    height: auto;
+}
+
+.text-westlake-service {
+    position: absolute;
+    font-size: 50px;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial;
+    color: #ffffff;
+    bottom: 50%;
+    font-weight: 700;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.fm-title {
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 70px;
+    line-height: 100px;
+    color: #ffffff;
+}
+
+.westlake-service {
+    border: 1px solid rgb(207, 207, 207);
+    /* border-radius: 8px; */
+    box-shadow: 4px 4px 4px grey;
+}
+
+
+.img-box {
+    width: 20%;
+    height: auto;
+    margin-right: 20px;
+}
+
+.title {
+    color: #484848;
+    font-weight: 500;
+    font-size: 1.6rem;
+}
+
+.text-content {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 26px;
+    color: #9a9a9a;
+}
+
+p {
+    margin-bottom: 0;
+}
+
+@media only screen and (min-width: 992px) {
+    .img-box-mobile {
+        display: none;
+    }
+    .btn-order-now {
+        margin-top: 30px;
+    }
+}
+
+@media only screen and (min-width: 414px) and (max-width: 992px) {
+    .img-box {
+        width: 30%;
+        height: 30%;
+        margin: auto 15px;
+    }
+    .text-content {
+        font-size: 14px;
+    }
+    .title {
+        font-size: 25px;
+    }
+    .img-box-mobile {
+        display: none;
+    }
+    .fm-title {
+        font-size: 40px;
+        line-height: 60px;
+    }
+    .text-westlake-service {
+        top: 60%;
+    }
+}
+
+@media only screen and (max-width: 414px) {
+    .img-box-mobile {
+        width: 100%;
+        height: auto;
+        margin-right: none;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .img-box-none {
+        display: none;
+    }
+    .westlake-service {
+        border: none;
+    }
+    .text-content {
+        font-size: 14px;
+        text-align: justify;
+    }
+    .title {
+        line-height: 40px;
+    }
+    .img-intro {
+        width: 100%;
+        height: 250px;
+    }
+    .fm-title {
+        display: none;
+    }
+}

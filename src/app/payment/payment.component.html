@@ -1,0 +1,118 @@
+<app-header></app-header>
+<!--  -->
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<main>
+  <div class="container">
+    <div class="w-form">
+      <div class="row box-main">
+        <div class="col-6 px-0">
+          <img
+            src="/assets/images/receptionist/paymentimg.png"
+            alt=""
+            class="img-box"
+          />
+        </div>
+        <div class="col-6 px-0 my-auto content-payment">
+          <div class="row">
+            <div class="col-6 pe-0">
+              <p class="text-capitalize fm-content">Mã đơn hàng:</p>
+            </div>
+            <div class="col-6 ps-0">
+              <p class="text-capitalize fm-content">{{ codeOrder }}</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-6 pe-0">
+              <p class="text-capitalize fm-content">Số tiền:</p>
+            </div>
+            <div class="col-6 ps-0">
+              <p class="text-capitalize fm-content">{{ price }}</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-6 pe-0">
+              <p class="text-capitalize fm-content">Nội dung thanh toán:</p>
+            </div>
+            <div class="col-6 ps-0">
+              <p class="text-capitalize fm-content">{{ contentPayment }}</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-6 pe-0">
+              <p
+                *ngIf="bankTransactionNumber"
+                class="text-capitalize fm-content"
+              >
+                Mã GD Ngân Hàng:
+              </p>
+            </div>
+            <div class="col-6 ps-0">
+              <p
+                *ngIf="bankTransactionNumber"
+                class="text-capitalize fm-content"
+              >
+                {{ bankTransactionNumber }}
+              </p>
+            </div>
+          </div>
+          <hr *ngIf="resultPayment == '00' || resultPayment == '07'">
+          <div class="row">
+            <div class="col-6 pe-0">
+              <p class="text-capitalize fm-content">Mã GD tại VNPAY:</p>
+            </div>
+            <div class="col-6 ps-0">
+              <p class="text-capitalize fm-content">
+                {{ vnpTransactionNumber }}
+              </p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-6 pe-0">
+              <p class="text-capitalize fm-content">Mã ngân hàng:</p>
+            </div>
+            <div class="col-6 ps-0">
+              <p class="text-capitalize fm-content">{{ bankCode }}</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-6 pe-0">
+              <p class="text-capitalize fm-content">Thời gian thanh toán:</p>
+            </div>
+            <div class="col-6 ps-0">
+              <p class="text-capitalize fm-content">{{ timePayment }}</p>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-6 pe-0">
+              <p class="text-capitalize fm-content">Kết quả:</p>
+            </div>
+            <div class="col-6 ps-0">
+              <p
+                *ngIf="resultPayment === '00'"
+                style="color: green"
+                class="text-capitalize fm-content"
+              >
+                {{ contentResultPayment }}
+              </p>
+              <p
+                *ngIf="resultPayment !== '00'"
+                class="text-capitalize fm-content text-danger"
+              >
+                {{ contentResultPayment }}
+              </p>
+            </div>
+          </div>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<!--  -->
+<app-footer-none></app-footer-none>

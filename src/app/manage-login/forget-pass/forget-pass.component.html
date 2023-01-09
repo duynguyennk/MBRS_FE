@@ -1,0 +1,70 @@
+
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<div class="container-fluid">
+    <div class="row login-form">
+        <div class="col-6 p-0 img-screen">
+            <img src="/assets/images/managelogin/forget1.jpg" alt="" class="img-main" />
+        </div>
+        <div class="col-6 p-0 img-lap">
+            <img src="/assets/images/managelogin/forget.jpg" alt="" class="img-main" />
+        </div>
+        <div class="col-6 my-auto text-center p-0">
+            <h1 class="fm-h1-animation mb-0">
+                Chào mừng đến WestLake Hotel
+              </h1>
+            <form [formGroup]="forgetPasswordForm" (ngSubmit)="onSubmit()" class="pos-form">
+                <p class="fs-3 fm-title text-forget text-center">Quên Mật Khẩu</p>
+                <div class="form-group mb-3 mx-auto">
+                    <input formControlName="UserName" [ngClass]="{'is-invalid':submitted && forgetPasswordForm.controls.UserName.errors}" minlength="2" maxlength="50" type="text" class="form-control form-control-lg rounded-pill" placeholder="Tên Đăng Nhập" required>
+                    <div *ngIf="submitted && forgetPasswordForm.controls.UserName.errors" class="text-danger text-start">
+                        <div *ngIf="forgetPasswordForm.controls.UserName.errors.required">
+                            {{isEmpty}}
+                        </div>
+                        <div *ngIf="forgetPasswordForm.controls.UserName.errors.minlength">
+                            {{atLeast2C}}
+                        </div>
+                        <div *ngIf="forgetPasswordForm.controls.UserName.errors.pattern">
+                            {{notspace}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mx-auto">
+                    <input formControlName="Email" [ngClass]="{'is-invalid':submitted && forgetPasswordForm.controls.Email.errors}" minlength="4" maxlength="50" type="email" class="form-control form-control-lg rounded-pill" placeholder="Email"  [email]="true" required/>
+                    <div *ngIf="submitted && forgetPasswordForm.controls.Email.errors" class="text-danger text-start">
+                        <div *ngIf="forgetPasswordForm.controls.Email.errors.required">
+                            {{isEmpty}}
+                        </div>
+                        <div *ngIf="forgetPasswordForm.controls.Email.errors.minlength">
+                            {{atLeast4C}}
+                        </div>
+                        <div *ngIf="forgetPasswordForm.controls.Email.errors.email">
+                            {{isEmail}}
+                        </div>
+                    </div>
+                </div>
+                <p class="text-danger">{{stringMessage}}</p>
+                <div class="pos-captcha my-4">
+                    <ngx-recaptcha2 #captchaElem
+                    [siteKey]="siteKey"
+                    formControlName="recaptcha">
+                  </ngx-recaptcha2>
+                  </div>
+                <div class="form-group mb-3">
+                    <button type="submit" class="btn btn-outline-dark px-5">Gửi</button>
+                </div>
+                <div class="form-group">
+                    <a routerLink="/manage-login">Đăng nhập</a>
+                </div>
+                <p class="text-center text-suggestions mb-0">
+                    *Nhập tên đăng nhập và email. Mật khẩu mới sẽ được gửi đến email của bạn, vui lòng check email sau khi bấm gửi.
+                </p>
+                <div class="logo text-center">
+                    <a href="./homepage">
+                        <img src="/assets/images/homepage/LogoPro.png" alt="" class="img-logo"/>
+                    </a>
+                </div>
+            </form>
+           
+        </div>
+    </div>
+</div>

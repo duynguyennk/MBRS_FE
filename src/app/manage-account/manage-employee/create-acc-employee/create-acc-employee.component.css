@@ -1,0 +1,20 @@
+form{
+  width: 80%;
+  margin: auto;
+}
+.btn-create-empl {
+  background-color: #ad8658;
+  border: none;
+  color: white;
+}
+
+.text-invalid {
+  color: rgba(72, 72, 72, 0.7);
+  font-size: 12px;
+}
+
+.color-red {
+  color: red;
+}
+
+

@@ -1,0 +1,29 @@
+main {
+    position: static;
+    margin-top: 400px;
+}
+
+.bg-footer {
+    background-color: #003c7a;
+    padding: 70px 30px;
+}
+
+.text-address {
+    font-weight: 400;
+    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial;
+}
+
+.none-desktop-ipad {
+    display: none;
+}
+
+@media only screen and (min-width: 1024px) {}
+
+@media only screen and (max-width: 413px) {
+    .none-mobile {
+        display: none;
+    }
+    .none-desktop-ipad {
+        display: inherit;
+    }
+}

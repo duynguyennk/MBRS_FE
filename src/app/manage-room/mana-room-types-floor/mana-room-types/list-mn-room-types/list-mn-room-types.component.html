@@ -1,0 +1,175 @@
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<main class="container-fluid">
+  <div class="room-type-floor">
+    <p class="fm-title">Quản Lý Loại Phòng</p>
+  </div>
+  <hr />
+  <!-- main -->
+  <!--  -->
+  <div class="mana-empl p-3">
+    <p class="text-search">Tìm Kiếm:</p>
+    <div class="d-flex justify-content-between my-4">
+      <form [formGroup]="searchFormTypeRoom" (ngSubmit)="onSubmitTypeRoom()">
+        <div class="mana-empl-search row">
+          <div class="col-4 my-auto">
+            <input
+              formControlName="filterValue"
+              type="text"
+              placeholder="Tìm Kiếm"
+              minlength="1"
+              maxlength="150"
+              class="form-control me-2"
+            />
+          </div>
+          
+          <div class="col-4 my-auto">
+            <select
+              formControlName="filterName"
+              [ngClass]="{
+                'is-invalid':
+                  submitted && searchFormTypeRoom.controls.filterName.errors
+              }"
+              class="form-select"
+              id="inputGroupSelect01"
+            >
+              
+              <option value="all">Tất Cả</option>
+              <option value="type_room_code">Mã Loại Phòng</option>
+              <option value="type_room_name">Tên Loại Phòng</option>
+              <option value="number_of_child">SL Trẻ Em</option>
+              <option value="number_of_bed">SL Giường</option>
+              <option value="number_of_adult">SL Người Lớn</option>
+              <option value="number_of_view">SL Ban Công</option>
+              <option value="number_of_adding_bed">SL Giường Thêm</option>
+              <option value="number_of_bath_room">SL Phòng Tắm</option>
+              <option value="room_square">Diện Tích</option>
+              <option value="price">Giá</option>
+            </select>
+          </div>
+          <div class="col-4">
+            <button class="fm-btn-y" type="submit">Tìm Kiếm</button>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4"></div>
+          <div class="col-4">
+            <div
+              *ngIf="submitted && searchFormTypeRoom.controls.filterName.errors"
+              class="text-danger text-center"
+            >
+              <div
+                *ngIf="searchFormTypeRoom.controls.filterName.errors.required"
+              >
+                {{ isEmpty }}
+              </div>
+            </div>
+          </div>
+          <div class="col-4"></div>
+        </div>
+      </form>
+      <div class="mana-customer-createAcc">
+        <a routerLink="./add-room-types">
+          <button type="button" class="btn btn-outline-secondary">
+            <i class="pi pi-plus"></i> Thêm Loại Phòng
+          </button>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- table -->
+  <div class="p-3">
+    <div class="text-center">
+      <table class="table">
+        <thead>
+          <tr class="text-white">
+            <th class="my-auto">
+              <p class="mb-0">STT</p>
+            </th>
+            <th (click)="sortTypeRoom('numberFloor')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Mã Loại Phòng
+            </th>
+            <th (click)="sortTypeRoom('numberFloor')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Tên Loại Phòng
+            </th>
+            <th (click)="sortTypeRoom('numberFloor')" scope="col">
+              <i class="pi pi-sort align-middle"></i> SL Trẻ Em
+            </th>
+            <th (click)="sortTypeRoom('numberFloor')" scope="col">
+              <i class="pi pi-sort align-middle"></i> SL Giường
+            </th>
+            <th (click)="sortTypeRoom('numberFloor')" scope="col">
+              <i class="pi pi-sort align-middle"></i> SL Người Lớn
+            </th>
+            <th (click)="sortTypeRoom('numberFloor')" scope="col">
+              <i class="pi pi-sort align-middle"></i> SL Ban Công
+            </th>
+            <th (click)="sortTypeRoom('numberFloor')" scope="col">
+              <i class="pi pi-sort align-middle"></i> SL Giường Thêm
+            </th>
+            <th (click)="sortTypeRoom('numberFloor')" scope="col">
+              <i class="pi pi-sort align-middle"></i> SL Phòng Tắm
+            </th>
+            <th (click)="sortTypeRoom('numberFloor')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Diện Tích
+            </th>
+            <th (click)="sortTypeRoom('numberFloor')" scope="col">
+              <i class="pi pi-sort align-middle"></i> Giá
+            </th>
+            <th scope="col">Thao Tác</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="
+              let t of typeRoomList
+                | paginate
+                  : {
+                      itemsPerPage: tableSizeTypeRoom,
+                      currentPage: pageTypeRoom,
+                      totalItems: countTypeRoom
+                    }
+                | orderBy : orderHeaderTypeRoom : isDescOrderTypeRoom
+            "
+          >
+            <td></td>
+            <td>{{ t.typeRoomCode }}</td>
+            <td class="text-start">{{ t.typeRoomName }}</td>
+            <td>{{ t.numberOfChild }}</td>
+            <td>{{ t.numberOfBed }}</td>
+            <td>{{ t.numberOfAdult }}</td>
+            <td>{{ t.numberOfView }}</td>
+            <td>{{ t.numberOfAddingBed }}</td>
+            <td>{{ t.numberOfBathRoom }}</td>
+            <td>{{ t.roomSquare }}</td>
+            <td>{{ t.price }}</td>
+            <td>
+              <a [routerLink]="['./edit-room-types/', t.typeRoomID]"
+                ><i class="pi pi-pencil me-2"></i
+              ></a>
+              <a routerLink="./" (click)="deleteTypeRoom(t.typeRoomID)"
+                ><i class="pi pi-user-minus"></i
+              ></a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <div class="">
+      <select (change)="onTableSizeChangeTypeRoom($event)">
+        <option *ngFor="let size of tableSizes">
+          {{ size }}
+        </option>
+      </select>
+    </div>
+    <div>
+      <pagination-controls
+        previousLabel="Trước"
+        nextLabel="Tiếp"
+        (pageChange)="onTableDataChangeTypeRoom($event)"
+      >
+      </pagination-controls>
+    </div>
+  </div>
+</main>

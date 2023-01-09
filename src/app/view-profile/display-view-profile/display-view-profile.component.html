@@ -1,0 +1,85 @@
+<app-header></app-header>
+<!--  -->
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<main class="container">
+    <div class="w-form">
+        <div class="row box-main">
+          <div class="col-6 px-0">
+            <img src="/assets/images/homepage/viewprofile.jpg" alt="" class="img-box">
+          </div>
+          <div class="col-6 px-0 my-auto">
+            <div class="view-profile">
+              <p class="fs-4 fm-title">
+                Hồ Sơ Tài Khoản
+             </p>
+             <hr>
+             <!-- <p>Chưa có tài khoản <a routerLink="../manage-login">Đăng nhập</a></p> -->
+             <div class="content-main row">
+              <div class="row">
+                <div class="col-6">
+                  <p class="fm-text-title">Họ Và Tên</p>
+                </div>
+                <div class="col-6">
+                <p class="text-infor text-capitalize">{{informationObject[0].fullName}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-6">
+                <p class="fm-text-title">CCCD/CMND</p>
+                </div>
+                <div class="col-6">
+                <p class="text-infor text-capitalize">{{informationObject[0].identifyNumber}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-6">
+                <p class="fm-text-title">Số Điện Thoại</p>
+                </div>
+                <div class="col-6">
+                <p class="text-infor text-capitalize">{{informationObject[0].phoneNumber}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-6">
+                <p class="fm-text-title">Email</p>
+                </div>
+                <div class="col-6">
+                <p class="text-infor text-capitalize">{{informationObject[0].email}}</p>
+                </div>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-6">
+                <p class="fm-text-title">Ngày Sinh</p>
+                </div>
+                <div class="col-6">
+                <p class="text-infor text-capitalize">{{informationObject[0].dateOfBirthConvert}}</p>
+                </div>
+              </div>
+              <hr>
+             </div>
+            <div class="btn-dele-sub">              
+                  <div class="row text-center pt-3">
+                    <a routerLink="./edit-profile" class="col-6 px-0">
+                      <button class="fm-btn-y" type="submit" >
+                        Sửa Tài Khoản
+                      </button>
+                    </a>
+                    <a class="col-6 px-0" (click)="dialogChangePass()">
+                      <button class="fm-btn-y" type="submit">
+                        Đổi Mật Khẩu
+                      </button>
+                    </a>
+                 </div>                      
+            </div>
+            </div> 
+          </div>
+
+        </div>          
+    </div>
+</main>
+<!--  -->
+<app-footer-none></app-footer-none>

@@ -1,0 +1,79 @@
+main {
+    position: relative;
+    top: 12%;
+    padding: 3rem;
+  }
+  .view-profile {
+    width: 100%;
+    margin: auto;
+    padding: 40px;
+    background: #ffffff;
+  }
+  .w-form{
+    width: 80%;
+    margin: auto;
+  }
+  .btn-create-customer {
+    background-color: #ad8658;
+    border: none;
+    color: white;
+  }
+  
+  .text-invalid {
+    color: rgba(72, 72, 72, 0.7);
+    font-size: 12px;
+  }
+  
+  .color-red {
+    color: red;
+  }
+  
+  input {
+    margin: 0.5rem 0;
+  }
+  
+  select {
+    margin: 0.5rem 0;
+  }
+  
+  .form-group {
+    display: flex;
+    justify-content: space-between;
+  }
+  .fm-text-title {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #cc7f27;
+  }
+  
+  .content-main {
+    line-height: 3rem;
+    margin: 3rem 0;
+  }
+  .text-infor {
+    font-size: 1rem;
+    font-weight: 500;
+    word-wrap: break-word;
+  }
+
+  /* .content-main,
+  p:not(:last-child) {
+    line-height: 2.5rem;
+    border-bottom: 1px solid rgb(236, 236, 236);
+  } */
+  .img-box {
+    width: 100%;
+    height: -webkit-fill-available;
+  }
+  .box-main {
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background: #ffffff;
+    border: 1px solid rgb(187, 187, 187);
+  }
+  p{
+    margin-bottom: 0;
+  }
+  hr{
+    margin: 0;
+    color: rgb(175, 175, 175) !important;
+}

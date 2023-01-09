@@ -1,0 +1,33 @@
+.btn-add-room {
+  background-color: #ad8658;
+  border: none;
+  color: white;
+}
+
+.img-box {
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+}
+
+.btn-icon-delete {
+  border: none;
+  background-color: #fafafa;
+  position: relative;
+}
+
+.pos-icon {
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  transform: translate(-50%, 0);
+}
+
+.m2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #484848b2;
+}
+
+

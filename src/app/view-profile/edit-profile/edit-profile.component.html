@@ -1,0 +1,223 @@
+<app-header></app-header>
+<!--  -->
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<main class="container">
+  <div class="w-form">
+    <div class="row box-main">
+      <div class="col-6 px-0">
+        <img
+          src="/assets/images/homepage/viewprofile.jpg"
+          alt=""
+          class="img-box"
+        />
+      </div>
+      <div class="col-6 px-0">
+        <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+          <div class="view-profile">
+            <p class="fs-4 fm-title">Hồ Sơ Tài Khoản</p>
+            <!-- <p>Chưa có tài khoản <a routerLink="../manage-login">Đăng nhập</a></p> -->
+            <div class="content-main">
+              <input
+                formControlName="customerID"
+                type="hidden"
+                class="form-control"
+              />
+              <input
+                formControlName="accountID"
+                type="hidden"
+                class="form-control"
+              />
+              <div class="row form-group mb-0">
+                <div class="col-6">
+                  <p class="fm-text-title mb-0">Họ Và Tên</p>
+                </div>
+                <div class="col-6 form-group">
+                  <input
+                    type="text"
+                    formControlName="fullName"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && customerForm.controls.fullName.errors
+                    }"
+                    minlength="2"
+                    maxlength="50"
+                    class="form-control"
+                  />
+                  <div
+                    *ngIf="submitted && customerForm.controls.fullName.errors"
+                  >
+                    <div *ngIf="customerForm.controls.fullName.errors.required">
+                      {{ isEmpty }}
+                    </div>
+                    <div
+                      *ngIf="customerForm.controls.fullName.errors.minlength"
+                    >
+                      {{ atLeast2C }}
+                    </div>
+                    <div *ngIf="customerForm.controls.fullName.errors.pattern">
+                      {{ isLetter }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-6">
+                  <p class="fm-text-title mb-0">CCCD/CMND</p>
+                </div>
+                <div class="col-6">
+                  <input
+                    type="text"
+                    formControlName="identifyNumber"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && customerForm.controls.fullName.errors
+                    }"
+                    minlength="9"
+                    maxlength="15"
+                    class="form-control"
+                  />
+                  <div
+                    *ngIf="
+                      submitted && customerForm.controls.identifyNumber.errors
+                    "
+                  >
+                    <div
+                      *ngIf="
+                        customerForm.controls.identifyNumber.errors.required
+                      "
+                    >
+                      {{ isEmpty }}
+                    </div>
+                    <div
+                      *ngIf="
+                        customerForm.controls.identifyNumber.errors.minlength
+                      "
+                    >
+                      {{ atLeast12C }}
+                    </div>
+                    <div
+                      *ngIf="
+                        customerForm.controls.identifyNumber.errors.pattern
+                      "
+                    >
+                      {{ isNum }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-6">
+                  <p class="fm-text-title mb-0">Số Điện Thoại</p>
+                </div>
+                <div class="col-6">
+                  <input
+                    type="text"
+                    formControlName="phoneNumber"
+                    class="form-control"
+                  />
+                  <div
+                    *ngIf="
+                      submitted && customerForm.controls.phoneNumber.errors
+                    "
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && customerForm.controls.phoneNumber.errors
+                    }"
+                    minlength="10"
+                    maxlength="11"
+                    class="text-danger"
+                  >
+                    <div
+                      *ngIf="customerForm.controls.phoneNumber.errors.required"
+                    >
+                      {{ isEmpty }}
+                    </div>
+                    <div
+                      *ngIf="customerForm.controls.phoneNumber.errors.minlength"
+                    >
+                      {{ atLeast10C }}
+                    </div>
+                    <div
+                      *ngIf="customerForm.controls.phoneNumber.errors.pattern"
+                    >
+                      {{ isNum }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-6">
+                  <p class="fm-text-title mb-0">Email</p>
+                </div>
+                <div class="col-6">
+                  <input
+                    type="email"
+                    formControlName="email"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && customerForm.controls.email.errors
+                    }"
+                    minlength="4"
+                    maxlength="50"
+                    class="form-control"
+                  />
+                  <div
+                    *ngIf="submitted && customerForm.controls.email.errors"
+                    class="text-danger"
+                  >
+                    <div *ngIf="customerForm.controls.email.errors.required">
+                      {{ isEmpty }}
+                    </div>
+                    <div *ngIf="customerForm.controls.email.errors.minlength">
+                      {{ atLeast4C }}
+                    </div>
+                    <div *ngIf="customerForm.controls.email.errors.email">
+                      {{ isEmail }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col-6">
+                  <p class="fm-text-title mb-0">Ngày Sinh</p>
+                </div>
+                <div class="col-6">
+                  <input
+                  max = "{{defaultCheckYears}}"
+                    type="date"
+                    formControlName="dateOfBirth"
+                    [ngClass]="{
+                      'is-invalid':
+                        submitted && customerForm.controls.dateOfBirth.errors
+                    }"
+                    class="form-control"
+                  />
+                  <div
+                    *ngIf="
+                      submitted && customerForm.controls.dateOfBirth.errors
+                    "
+                    class="text-danger"
+                  >
+                    <div
+                      *ngIf="customerForm.controls.dateOfBirth.errors.required"
+                    >
+                      {{ isEmpty }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="btn-dele-sub">
+              <div class="text-center">
+                <button class="fm-btn-y" type="submit">Lưu</button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+<!--  -->
+<app-footer-none></app-footer-none>

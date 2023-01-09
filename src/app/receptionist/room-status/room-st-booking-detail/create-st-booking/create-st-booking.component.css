@@ -1,0 +1,89 @@
+.fm-title {
+    line-height: 45px;
+  }
+  .title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 1.5rem 0;
+  }
+  form {
+    width: 80%;
+    margin: auto;
+  }
+  .form-border {
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 5rem;
+  }
+  .fm-text {
+    font-weight: 600;
+    color: #484848;
+    font-size: 1.2rem;
+  }
+  .fm-text-u {
+    font-weight: 600;
+    color: #484848cc;
+    font-size: 1rem;
+  }
+  .fm-text-link {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #228a98;
+    text-decoration: none;
+    margin-left: 1rem;
+  }
+  .p-contact-info {
+    padding: 2rem 10rem;
+  }
+  .required-text {
+    font-size: 0.8rem;
+    color: #484848b2;
+    font-weight: 500;
+  }
+  .fm-bg-border {
+    background-color: #003c7a;
+    border: 1px solid;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.5rem 6rem;
+  }
+  .bg-grey-20 {
+    background-color: #fafafa;
+  }
+  .bg-remind {
+    background-color: #f1edd9;
+  }
+  .form-check-label {
+    vertical-align: middle;
+  }
+  .fm-text-checkbox {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-left: 1rem;
+  }
+  .bg-light-blue {
+    background-color: #a7eae2;
+  }
+  .pos-form > div > p:first-child {
+    font-size: 1.5rem;
+    line-height: 45px;
+  }
+  .price {
+    font-weight: 700;
+  }
+  .title-special{
+    font-size: 1.5rem;
+  }
+  input[type=checkbox]{
+   zoom: 2;
+  }
+  input{
+    margin: 1rem 0;
+  }
+  input[type=radio]{
+    margin: 2px 0;
+  }

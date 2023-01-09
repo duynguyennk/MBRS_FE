@@ -1,0 +1,175 @@
+<app-header></app-header>
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<main>
+  <div class="bg-main">
+    <img src="/assets/images/booking-service/Hinh-anh-Ho-Tay-nhin-tu-tren-cao.jpg" alt="" class="img-intro" />
+    <p class="text-view-order fm-title">
+            XEM ĐƠN HÀNG 
+        </p>
+  </div>
+
+  <div class="container">
+    <div class="w-form-80">
+      <div class="row fm-view-order my-5">
+        <!-- mapping code here -->
+        <form [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+          <div class="row mb-4">
+            <div class="col-4 my-auto">
+              <select  formControlName="filterName" class="form-select" aria-label="Default select example"  (ngModelChange)="onchangeSelect($event)">
+                <option value="1">Đơn đặt phòng</option>
+                <option value="2">Đơn đặt đồ ăn</option>
+                <option value="3">Đơn đặt xe đạp</option>
+              </select>
+            </div>
+            <div class="col-4 my-auto">
+              <a href="{{webUrl}}/view-order?selected={{selectedEvent}}" class="fm-btn-y">Tìm Kiếm</a>
+            </div>
+            <div class="col-4"></div>
+          </div>
+          <div *ngFor="let item of listOrder" class="view-order w-100 px-5 py-3 hvr-grow mb-5">
+            <p *ngIf="selectedOption == 1" class="fm-title my-2">{{ item.typeRoomName }}</p>
+            <p *ngIf="selectedOption == 2" class="fm-title my-2">Đơn đặt đồ ăn</p>
+            <p *ngIf="selectedOption == 3" class="fm-title my-2">Đơn đặt xe đạp</p>
+            <hr />
+            <div *ngIf="selectedOption == 1" class="bicycle-service d-flex">
+              <img src="{{item.firstImageBase64}}" alt="" class="img-box rounded img-box-none" />
+              <div class="content my-auto">
+                <p class="text-content mb-2">
+                  Ngày Nhận: <span>{{ item.convertDateCheckIn }}</span>
+                </p>
+                <p class="text-content mb-2">
+                  Ngày trả: <span>{{ item.convertDateCheckOut }}</span>
+                </p>
+                <p class="text-content mb-2">
+                  Thời gian đặt: <span>{{ item.convertDate }}</span>
+                </p>
+                <p class="text-content mb-2">
+                  Số Lượng: <span>{{ item.totalRoom }}</span>
+                </p>
+                <p class="text-content mb-2">
+                  Trạng thái thanh toán:
+                  <span style="color: green;"*ngIf="item.statusPayment == '00'  && item.typeOrder === 1 && item.deleteFlag === 0  ">Đã thanh toán đầy đủ</span>
+                  <span style="color: blue;" *ngIf="item.statusPayment == '00' && item.typeOrder === 2  && item.deleteFlag === 0 ">Đã thanh toán đặt cọc</span>
+                  <span style="color: red;" *ngIf="item.statusPayment == '00'  && item.deleteFlag == 1 ">Đã hủy thanh toán</span>
+                  <span style="color: red;" *ngIf="item.statusPayment == '00'  && item.deleteFlag == 2  ">Đã hủy thanh toán(Đợi hoàn tiền)</span>
+                  <span style="color: green;" *ngIf="item.statusPayment == '00'  && item.deleteFlag ==3 ">Đã hoàn tiền</span>
+                </p>
+                <p *ngIf="item.checkCancel && item.deleteFlag == 0 && item.statusRoom == 0" class="text-content mb-4">
+                  Thời gian hủy:
+                  <span style="color: red;">Đã quá thời gian có thể hủy đơn đặt</span>
+                </p>
+                <div class="icon-box d-flex justify-content-between">
+                  <div class="d-flex justify-content-around">
+                    <img src="/assets/images/manage-room/icon-bed.jpg" alt="" class="img-box-icon" />
+                    <p class="text-icon">{{ item.numberOfBed }}</p>
+                  </div>
+                  <div class="d-flex justify-content-around">
+                    <img src="/assets/images/manage-room/icon=bathtub.jpg" alt="" class="img-box-icon" />
+                    <p class="text-icon">{{ item.numberOfBathRoom }}</p>
+                  </div>
+                  <div class="d-flex justify-content-around">
+                    <img src="/assets/images/manage-room/icon-people.jpg" alt="" class="img-box-icon" />
+                    <p class="text-icon">{{ item.numberOfAdult }}</p>
+                  </div>
+                  <div class="d-flex justify-content-around">
+                    <img src="/assets/images/manage-room/icon-child.jpg" alt="" class="img-box-icon" />
+                    <p class="text-icon">{{ item.numberOfChild }}</p>
+                  </div>
+                  <div class="d-flex justify-content-around">
+                    <img src="/assets/images/manage-room/icon-balcony.jpg" alt="" class="img-box-icon" />
+                    <p class="text-icon">{{ item.numberOfView }}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="selectedOption == 2" class="bicycle-service d-flex">
+              <img src="/assets/images/booking-service/banhmi.png" alt="" class="img-box rounded img-box-none" />
+              <div class="content my-auto">
+                <p class="text-content mb-2">
+                  Thời gian đặt: <span>{{ item.convertDate }}</span>
+                </p>
+                <p class="text-content mb-2">
+                  Nội dung đặt: <span>{{ item.contentPayment }}</span>
+                </p>
+                <p class="text-content mb-2">
+                  Trạng Thái Thanh Toán:
+                  <span style="color: red;" *ngIf="item.statusPayment === null">Chưa Thanh Toán</span>
+                  <span style="color: green;" *ngIf="item.statusPayment == '00'">Đã Thanh Toán</span>
+                </p>
+              </div>
+            </div>
+            <div *ngIf="selectedOption == 3" class="bicycle-service d-flex">
+              <img src="/assets/images/booking-service/bicycles-737190_1920.jpg" alt="" class="img-box rounded img-box-none" />
+              <div class="content my-auto">
+                <p class="text-content mb-2">
+                  Thuê xe: <span>{{ item.contentPayment }}</span>
+                </p>
+                <p class="text-content mb-2">
+                  Ngày giờ lấy: <span>{{ item.convertDateGetBike }}</span>
+                </p>
+                <p class="text-content mb-2">
+                  Ngày giờ trả: <span>{{ item.convertDateGetBackBike }}</span>
+                </p>
+                <p class="text-content mb-2">
+                  Thời gian đặt: <span>{{ item.convertDate }}</span>
+                </p>
+                <p class="text-content mb-2">
+                  Trạng thái thanh toán:
+                  <span style="color: red;" *ngIf="item.statusPayment === null">Chưa Thanh Toán</span>
+                  <span style="color: green;" *ngIf="item.statusPayment == '00'">Đã Thanh Toán</span>
+                </p>
+              </div>
+            </div>
+            <hr />
+            <p class="text-content-money my-3 text-end">
+              Tổng Tiền: <span>{{ item.price | number }} VNĐ</span>
+            </p>
+
+            <div *ngIf="selectedOption == 1" class="d-flex flex-row-reverse">
+              <div *ngIf="item.ratingID == 0 && item.statusRoom == 3" class="my-3 p-1 ">
+                <a href="{{webUrl}}/feed-back?orderID={{
+                    item.orderID
+                  }}" class="fm-btn-y">Đánh Giá</a>
+              </div>
+              <div *ngIf="item.ratingID != 0" class="btn-order my-3 p-1">
+                <a class="fm-btn-y" href="{{webUrl}}/feed-back?ratingID={{
+                    item.ratingID
+                  }}">Xem Đánh Giá</a>
+              </div>
+              <div *ngIf="item.checkCancel == false && item.deleteFlag == 0 " class="my-3 p-1">
+                <a (click)="cancelOrderRoom(item.orderID,item.typeOrder,item.contentPayment,item.price)" class="fm-btn-y">Hủy Đơn Đặt</a>
+              </div>
+            </div>
+            
+            <div *ngIf="selectedOption == 2" class="d-flex flex-row-reverse">
+              <div *ngIf="item.ratingID == 0 && item.statusFood == 2" class="my-3 p-1 ">
+                <a href="{{webUrl}}/feed-back-service?orderID={{
+                    item.orderID
+                  }}&selected={{selectedOption}}" class="fm-btn-y">Đánh Giá</a>
+              </div>
+              <div *ngIf="item.ratingID != 0" class="btn-order my-3 p-1">
+                <a class="fm-btn-y" href="{{webUrl}}/feed-back-service?ratingID={{
+                    item.ratingID
+                  }}&selected={{selectedOption}}">Xem Đánh Giá</a>
+              </div>
+            </div>
+            <div *ngIf="selectedOption == 3" class="d-flex flex-row-reverse">
+              <div *ngIf="item.ratingID == 0 && item.statusBike == 2" class="my-3 p-1 ">
+                <a href="{{webUrl}}/feed-back-service?orderID={{
+                    item.orderID
+                  }}&selected={{selectedOption}}" class="fm-btn-y">Đánh Giá</a>
+              </div>
+              <div *ngIf="item.ratingID != 0" class="btn-order my-3 p-1">
+                <a class="fm-btn-y" href="{{webUrl}}/feed-back-service?ratingID={{
+                    item.ratingID
+                  }}&selected={{selectedOption}}">Xem Đánh Giá</a>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+<app-footer></app-footer>

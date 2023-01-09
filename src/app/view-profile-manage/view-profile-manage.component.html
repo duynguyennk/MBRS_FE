@@ -1,0 +1,46 @@
+<app-header-manage></app-header-manage>
+<!--  -->
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<main>
+    <div class="container">
+        <div class="row box-main">
+          <div class="col-6 px-0">
+            <img src="/assets/images/homepage/viewprofile.jpg" alt="" class="img-box">
+          </div>
+          <div class="col-6 px-0">
+            <div class="view-profile">
+              <p class="fw-bold fs-2 fm-title">
+                Hồ Sơ Tài Khoản
+             </p>
+             <!-- <p>Chưa có tài khoản <a routerLink="../manage-login">Đăng nhập</a></p> -->
+             <div class="content-main row">
+              <div class="col-6 px-0">
+                <p class="fm-text-title">Tên Tài Khoản</p>
+                <p class="fm-text-title">Họ Và Tên</p>
+                <p class="fm-text-title">CCCD</p>
+                <p class="fm-text-title">Số Điện Thoại</p>
+                <p class="fm-text-title">Email</p>
+                <p class="fm-text-title">Ngày Sinh</p>
+              </div>
+              <div class="col-6 px-0">
+                <p class="text-infor text-capitalize">binhdv2911</p>          
+                <p class="text-infor text-capitalize">Đinh Văn Bình</p>
+                <p class="text-infor text-capitalize">432423423434</p>
+                <p class="text-infor text-capitalize">0813955999</p>
+                <p class="text-infor text-capitalize">binhdsdsdsddddssds29sddsd11@gmail.com</p>
+                <p class="text-infor text-capitalize">29/11/1997</p>
+              </div>
+             </div>
+            <div class="btn-dele-sub">
+                <button class="fm-btn-y mt-5" type="submit">
+          Sửa Tài Khoản
+        </button>
+            </div>
+            </div> 
+          </div>
+
+        </div>          
+    </div>
+</main>
+<!--  -->
+<app-footer-none></app-footer-none>

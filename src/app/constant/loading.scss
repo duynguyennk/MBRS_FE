@@ -1,0 +1,36 @@
+#spinner {
+    -webkit-animation: frames 1s infinite linear;
+    animation: frames 0.6s infinite linear;
+    background: transparent;
+    border: 0.8vw solid #0b72d8;
+    border-radius:50%;
+    border-top-color: transparent;
+    width: 5vw;
+    height: 5vw;
+    opacity: 1;
+    padding: 0;
+    position: absolute;
+    z-index: 999;
+  }
+  @keyframes frames {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(359deg);
+      transform: rotate(359deg);
+    }
+  }
+  
+  #pause {
+    display: block;
+    background: rgba(0, 0, 0, 0.66) no-repeat 0 0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+  }
+// 

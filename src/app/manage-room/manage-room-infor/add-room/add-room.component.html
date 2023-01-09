@@ -1,0 +1,176 @@
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<main class="container">
+  <div class="w-form-60">
+    <div class="customer-text">
+      <p class="fm-title">
+        Tạo
+        Thông Tin Phòng Khách Sạn
+      </p>
+    </div>
+    <hr>
+    <p class="remind">Điền đầy đủ thông tin phòng bên dưới để tạo</p>
+      
+    <form [formGroup]="createForm" (ngSubmit)="onSubmit()" >
+      <div class="fm-border-60 mb-5">
+        <div class="form-group mb-4">
+          <!-- <input  formControlName="roomID" type="hidden" class="form-control" /> -->
+          <label for="roomCode" class="title-input"> <span class="color-red">*</span> Mã Phòng </label>
+          <input  formControlName="roomCode" type="text" [ngClass]="{'is-invalid':submitted&&createForm.controls.roomCode.errors}" minlength="2" maxlength="50" class="form-control" placeholder="VD: R19"/>
+          <div *ngIf="submitted && createForm.controls.roomCode.errors" class="text-danger">
+            <div *ngIf="createForm.controls.roomCode.errors.required">
+              {{isEmpty}}
+            </div>
+            <div *ngIf="createForm.controls.roomCode.errors.minlength">
+              {{atLeast2C}}
+            </div>
+            <div *ngIf="createForm.controls.roomCode.errors.pattern">
+              {{atLeastNum_Let}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-4">
+          <label for="roomName" class="title-input"><span class="color-red">*</span> Tên Phòng </label>
+          <input formControlName="roomName" type="text" [ngClass]="{'is-invalid':submitted&&createForm.controls.roomName.errors}" minlength="2" maxlength="50" class="form-control" placeholder="VD: P407"/>
+          <div *ngIf="submitted && createForm.controls.roomName.errors" class="text-danger">
+            <div *ngIf="createForm.controls.roomName.errors.required">
+              {{isEmpty}}
+            </div>
+            <div *ngIf="createForm.controls.roomName.errors.minlength">
+              {{atLeast2C}}
+            </div>
+            <div *ngIf="createForm.controls.roomName.errors.pattern">
+             {{atLeastNum_Let}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-4">
+          <label for="typeRoomID" class="title-input"><span class="color-red">*</span> Loại Phòng </label>
+          <select formControlName="typeRoomID" [ngClass]="{'is-invalid':submitted&&createForm.controls.typeRoomID.errors}" class="form-select form-select-lg" (ngModelChange)="onchangeSelect($event)">
+            <option *ngFor="let t of typeRoomList" value="{{ t.typeRoomID }}">
+              {{ t.typeRoomName}}
+            </option>        
+          </select>
+          <div *ngIf="submitted&&createForm.controls.typeRoomID.errors" class="text-danger">
+            <div *ngIf="createForm.controls.typeRoomID.errors.required">
+              {{isEmpty}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-4">
+          <label for="floorID" class="title-input"><span class="color-red">*</span> Tầng </label>
+          <select formControlName="floorID" [ngClass]="{'is-invalid':submitted&&createForm.controls.floorID.errors}" class="form-select form-select-lg">
+            <option *ngFor="let f of floorList" value="{{ f.numberFloor }}">
+              {{ f.floorName }}
+            </option>
+            
+          </select>
+          <div *ngIf="submitted&&createForm.controls.floorID.errors" class="text-danger">
+            <div *ngIf="createForm.controls.floorID.errors.required">
+              {{isEmpty}}
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+     
+      <!-- Convenient -->
+      <p *ngIf="detailRoomInformation != null" class="fm-text">Tiện Nghi</p>
+      <div *ngIf="detailRoomInformation != null" class="fm-border mb-5">
+        <div *ngIf="detailRoomInformation[0].safetyBox" class="form-group mb-4">
+          <img src="/assets/images/small-icon/safe-box.png" alt="" class="icon-box" />
+          <span class="mx-2">Tủ Bảo Mật</span>
+        </div>
+        <div *ngIf="detailRoomInformation[0].tivi" class="form-group mb-4">
+          <img src="/assets/images/small-icon/television.png" alt="" class="icon-box" />
+          <span class="mx-2">Ti vi</span>
+        </div>
+        <div *ngIf="detailRoomInformation[0].iron" class="form-group mb-4">
+          <img src="/assets/images/small-icon/iron.png" alt="" class="icon-box" />
+          <span class="mx-2">Bàn Là</span>
+        </div>
+        <div *ngIf="detailRoomInformation[0].airCondition" class="form-group mb-4">
+          <img src="/assets/images/small-icon/air-conditioner.png" alt="" class="icon-box" />
+          <span class="mx-2">Điều Hòa</span>
+        </div>
+        <div *ngIf="detailRoomInformation[0].fridge" class="form-group mb-4">
+          <img src="/assets/images/small-icon/fridge.png" alt="" class="icon-box" />
+          <span class="mx-2">Tủ Lạnh</span>
+        </div>
+        <div *ngIf="detailRoomInformation[0].dryer" class="form-group mb-4">
+          <img src="/assets/images/small-icon/hair-dryer.png" alt="" class="icon-box" />
+          <span class="mx-2">Máy Sấy</span>
+        </div>
+        <div *ngIf="detailRoomInformation[0].heaterBath" class="form-group mb-4">
+          <img src="/assets/images/small-icon/heatwater.png" alt="" class="icon-box" />
+          <span class="mx-2">Nước Nóng</span>
+        </div>
+        <div *ngIf="detailRoomInformation[0].heaterRoom" class="form-group mb-4">
+          <img src="/assets/images/small-icon/room-heater.png" alt="" class="icon-box" />
+          <span class="mx-2">Lò Sưởi</span>
+        </div>
+        <div *ngIf="detailRoomInformation[0].wifi" class="form-group mb-4">
+          <img src="/assets/images/small-icon/wifi.png" alt="" class="icon-box" />
+          <span class="mx-2">WIFI</span>
+        </div>
+        <div *ngIf="detailRoomInformation[0].dinnerTable" class="form-group mb-4">
+          <img src="/assets/images/small-icon/table.png" alt="" class="icon-box" />
+          <span class="mx-2">Bàn Ăn</span>
+        </div>
+      </div>
+      <!--  -->
+      <p *ngIf="detailRoomInformation != null" class="fm-text">
+        Thông Tin Loại Phòng
+      </p>
+      <div *ngIf="detailRoomInformation != null" class="fm-border mb-5">
+        <div class="mb-4">
+          <img src="/assets/images/small-icon/bed.png" alt="" class="icon-box" />
+          <span class="mx-2">{{ detailRoomInformation[0].numberOfBed }}</span>
+          <img src="/assets/images/small-icon/bathtub.png" alt="" class="icon-box" />
+          <span class="mx-2">{{
+            detailRoomInformation[0].numberOfBathRoom
+            }}</span>
+          <img src="/assets/images/small-icon/adult.png" alt="" class="icon-box" />
+          <span class="mx-2">{{ detailRoomInformation[0].numberOfAdult }}</span>
+          <img src="/assets/images/small-icon/child.png" alt="" class="icon-box" />
+          <span class="mx-2">{{ detailRoomInformation[0].numberOfChild }}</span>
+          <img src="/assets/images/small-icon/balcony.png" alt="" class="icon-box" />
+          <span class="mx-2">{{ detailRoomInformation[0].numberOfView }}</span>
+        </div>
+        <div class="">
+          <ul class="mb-0">
+            <li class="mb-2">
+              Giá: <span>{{ detailRoomInformation[0].price }}</span> VNĐ
+            </li>
+            <li>
+              Diện Tích:
+              <span>{{ detailRoomInformation[0].roomSquare }}</span> m<sup>2</sup>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!--  -->
+      <p *ngIf="detailRoomInformation != null" class="fm-text">
+        Giới Thiệu Loại Phòng
+      </p>
+      <div *ngIf="detailRoomInformation != null" class="fm-border mb-5">
+        <div class="mb-4">
+          <p class="content-intro">{{ detailRoomInformation[0].contentIntroduceRoom }}</p>
+        </div>
+      </div>
+      <!--  -->
+      <p *ngIf="detailRoomInformation != null" class="fm-text">Ảnh Phòng</p>
+      <div *ngIf="detailRoomInformation != null" class="d-flex justify-content-between">
+        <img src="{{detailRoomInformation[0].firstImageBase64}}" alt="" class="img-box" />
+        <img src="{{detailRoomInformation[0].secondImageBase64}}" alt="" class="img-box" />
+        <img src="{{detailRoomInformation[0].thirdImageBase64}}" alt="" class="img-box" />
+      </div>
+      <!--  -->
+      <div class="fm-btn-cancel text-end my-5">
+        <button class="fw-bold btn px-4 py-2" (click)="cancelForm()">
+          <i class="pi pi-times"></i> Huỷ
+        </button>
+        <button class="fm-btn-y" type="submit">Tạo</button>
+      </div>
+    </form>
+    </div>
+</main>

@@ -1,0 +1,113 @@
+<loading *ngIf="isLoading">{{ isLoading }}</loading>
+<main class="container">
+  <div class="w-form">
+    <p class="fm-title">Đặt Dịch Vụ Thức Ăn Và Đồ Uống</p>
+    <div class="separator-line my-4">
+      <svg width="100" height="6" viewBox="0 0 140 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="140" height="3" rx="3" fill="#484848" />
+      </svg>
+    </div>
+    <!-- form submit -->
+    <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-3">
+          <p class="title">Thông Tin Khách Lưu Trú</p>
+        </div>
+        <div class="col-3"></div>
+        <div class="col-4 my-auto">
+          <input formControlName="checkInformation" minlength="2" maxlength="50" type="text" class="form-control"
+            placeholder="Nhập số phòng khách lưu trú" (ngModelChange)="onchangeSelect($event)" [ngClass]="{'is-invalid':submitted && customerForm.controls.checkInformation.errors}"/>
+           
+        </div>
+        <div class="col-2 my-auto text-end">
+          <a (click)="searchInformation()" class="fm-btn-y">Tìm Kiếm</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-3"></div>
+        <div class="col-3"></div>
+        <div class="col-4">
+          <div *ngIf="submitted && customerForm.controls.checkInformation.errors" class="text-danger mb-2">
+            <div *ngIf="customerForm.controls.checkInformation.errors.required">
+              {{isEmpty}}
+            </div>
+          </div>
+    
+        </div>
+        <div class="col-2"></div>
+      </div>
+      
+      <div class="fm-border">
+        <div class="form-detail">
+          <div class="form-infor mb-5">
+            <div class="form-group">
+              <label for="fullName" class="fm-text"><span class="color-red">*</span>Tên Người Liên Hệ</label>
+              <input formControlName="customerID" type="hidden" class="form-control" />
+              <input formControlName="fullName" type="text" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+              <label for="identifyNumber" class="fm-text"><span class="color-red">*</span>CCCD/CMTND</label>
+              <input formControlName="identifyNumber" type="text" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+              <label for="email" class="fm-text"><span class="color-red">*</span>Email</label>
+              <input formControlName="email" type="email" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+              <label for="dateOfBirth" class="fm-text"><span class="color-red">*</span>Ngày Sinh</label>
+          <input formControlName="dateOfBirth" class="form-control" readonly />
+            </div>
+            <div class="form-group">
+              <label for="phoneNumber" class="fm-text"><span class="color-red">*</span>Số Điện Thoại</label>
+              <input formControlName="phoneNumber" type="text" class="form-control"  readonly/>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- price detail -->
+      <div class="form-infor mb-5">
+        <p class="title">Chi Tiết Giá</p>
+        <div class="fm-border">
+          <div class="pos-form row">
+            <div class="col-6">
+              <p class="text-capitalize ms-3">Tổng Giá Trị:</p>
+            </div>
+            <div class="col-6">
+              <p>{{ totalPrice | number }} VNĐ</p>
+            </div>
+          </div>
+          <hr />
+          <div class="pos-form row my-4">
+            <div class="col-6">
+              <p class="ms-3">Chi Tiết:</p>
+            </div>
+            <div class="col-6">
+              <!-- <p></p> -->
+            </div>
+          </div>
+          <div *ngFor="let f of foodOrderInformationJason" class="pos-form row">
+            <div class="col-6">
+              <p class="ms-3">{{ f.quantity }}x {{ f.foodName }}:</p>
+            </div>
+            <div class="col-6">
+              <p>{{ f.totalPrice | number }} VNĐ</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-infor row">
+        <div class="col-6">
+          <p>
+            Khi nhấn vào nút này bạn công nhận mình đã đọc và đồng ý với các
+            Điều khoản & Điều kiện và Chính sách quyền riêng tư của Westlake
+            Hotel
+          </p>
+        </div>
+        <div class="col-6 text-end">
+            <button  class="fm-btn-y" type="submit">Tiếp Tục</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</main>

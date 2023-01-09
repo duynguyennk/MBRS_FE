@@ -1,0 +1,63 @@
+h1 {
+    font-family: Montaga;
+    font-weight: 400;
+}
+
+.text-forget {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    color: #484848;
+}
+.img-main {
+    max-width: 100%;
+    width: 100%;
+    height: -webkit-fill-available;
+}
+.fm-h1-animation{
+    padding-bottom: 11.5rem;
+}
+.rate-room-line {
+    border: 0;
+    border-top: 5px solid #484848 !important;
+    padding: 5px 0;
+    width: 15%;
+}
+
+.text-suggestions {
+    color: #9a9a9a;
+    margin-bottom: 70px;
+}
+
+a {
+    color: black;
+}
+form{
+    width: 50%;
+    margin: auto;
+}
+.img-main{
+    width: 100%;
+    height: auto;
+}
+.img-logo{
+    width: 20%;
+    height: auto;
+}
+.pos-captcha{
+    text-align: -webkit-center;
+    margin: 1rem 0;
+}
+.logo{
+    padding-top: 0.8rem;
+}
+.img-lap{
+    display: none;
+}
+@media only screen and (min-width: 992px) and (max-width: 1600px) {
+    .img-screen{
+        display: none;
+    }
+    .img-lap{
+        display: inherit;
+    }
+}
